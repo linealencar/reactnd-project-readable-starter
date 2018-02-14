@@ -11,7 +11,16 @@ import Modal from 'react-modal';
 class App extends Component {
   state = {
     categories: [],
-    posts: []
+    posts: [],
+    postModalOpen: false,
+    id: null,
+    //timestamp,
+    title: '',
+    body: '',
+    author: ''
+    //category,
+    //voteScore,
+    //deleted
   };
 
   componentDidMount() {
@@ -25,24 +34,18 @@ class App extends Component {
   }
   submitPost = () => {
     this.props.addPost({
-      id: 35,
-      //timestamp,
-      title: 'Teste',
-      body: this.input.value,
-      author: 'Aline'
+      id: 30,
+      timestamp: Date.now(),
+      title: this.state.title,
+      body: this.state.body,
+      author: this.state.author,
       //category,
-      //voteScore,
-      //deleted
+      voteScore: 0,
+      deleted: false
     });
 
-    this.input.value = '';
+    //this.input.value = '';
   };
-
-  // orderByScore = property => {
-  //   this.setState({
-  //     posts: this.props.posts.sort((a, b) => b[property] - a[property])
-  //   });
-  // };
 
   orderByScore = () => {
     this.setState({
@@ -56,7 +59,34 @@ class App extends Component {
     });
   };
 
+  openPostModal = () => this.setState(() => ({ postModalOpen: true }));
+
+  closePostModal = () =>
+    this.setState(() => ({
+      postModalOpen: false,
+      title: '',
+      body: '',
+      author: ''
+    }));
+
+  handleInputChange = event => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleSubmit = event => {
+    this.submitPost();
+    this.closePostModal();
+    event.preventDefault();
+  };
+
   render() {
+    const { postModalOpen } = this.state;
     const { posts } = this.props;
     return (
       <div className="App">
@@ -70,13 +100,14 @@ class App extends Component {
         <button className="icon-btn" onClick={this.orderByDate}>
           Order by Date
         </button>
-        <button className="icon-btn">Add post</button>
+        <button className="icon-btn" onClick={this.openPostModal}>
+          Add post
+        </button>
         <ul className="categories">
           {this.props.categories.map(categorie => (
             <li key={categorie.name}>{categorie.name}</li>
           ))}
         </ul>
-
         <ul className="posts">
           {posts.map(post => (
             <li key={post.id}>
@@ -84,12 +115,42 @@ class App extends Component {
             </li>
           ))}
         </ul>
-        <input
-          type="text"
-          ref={input => (this.input = input)}
-          placeholder="Add a post"
-        />
-        <button onClick={this.submitPost}>Submit</button>
+
+        <Modal
+          className="modal"
+          isOpen={postModalOpen}
+          overlayClassName="overlay"
+          onRequestClose={this.closePostModal}
+          contentLabel="Modal"
+        >
+          <form onSubmit={this.handleSubmit}>
+            <input
+              name="body"
+              type="text"
+              value={this.state.body}
+              onChange={this.handleInputChange}
+            />
+            <br />
+            <input
+              name="title"
+              type="text"
+              value={this.state.title}
+              onChange={this.handleInputChange}
+            />
+            <br />
+            <input
+              name="author"
+              type="text"
+              value={this.state.author}
+              onChange={this.handleInputChange}
+            />
+            <br />
+            <input type="submit" value="Submit" />
+            <button className="icon-btn" onClick={this.closePostModal}>
+              Cancel
+            </button>
+          </form>
+        </Modal>
       </div>
     );
   }
