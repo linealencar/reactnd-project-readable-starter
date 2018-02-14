@@ -7,6 +7,7 @@ import { addPost, listPost } from '../actions';
 import { listCategory } from '../actions';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import PostList from './PostList';
 
 class App extends Component {
   state = {
@@ -28,9 +29,9 @@ class App extends Component {
       this.props.listCategory(categories);
     });
 
-    APIPost.getAll().then(posts => {
-      this.props.listPost(posts);
-    });
+    // APIPost.getAll().then(posts => {
+    //   this.props.listPost(posts);
+    // });
   }
   submitPost = () => {
     this.props.addPost({
@@ -108,13 +109,7 @@ class App extends Component {
             <li key={categorie.name}>{categorie.name}</li>
           ))}
         </ul>
-        <ul className="posts">
-          {posts.map(post => (
-            <li key={post.id}>
-              {post.body} - {post.voteScore} - {post['timestamp']}
-            </li>
-          ))}
-        </ul>
+        <PostList />
 
         <Modal
           className="modal"
