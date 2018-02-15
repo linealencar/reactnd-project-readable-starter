@@ -23,6 +23,10 @@ class App extends Component {
   };
 
   componentDidMount() {
+    APIPost.getAll().then(posts => {
+      this.props.loadPosts(posts);
+    });
+
     APICategory.getAll().then(categories => {
       this.props.listCategory(categories);
     });
@@ -145,7 +149,8 @@ function mapDispatchToProps(dispatch) {
   return {
     addPost: post => dispatch(addPost(post)),
     listCategory: categories => dispatch(listCategory(categories)),
-    orderPosts: sortingType => dispatch(orderPosts(sortingType))
+    orderPosts: sortingType => dispatch(orderPosts(sortingType)),
+    loadPosts: posts => dispatch(loadPosts(posts))
   };
 }
 
