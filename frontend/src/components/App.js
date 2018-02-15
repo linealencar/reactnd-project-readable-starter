@@ -3,7 +3,7 @@ import * as APICategory from '../utils/APICategory';
 import * as APIPost from '../utils/APIPost';
 import logo from '../logo.svg';
 import '../App.css';
-import { addPost, listPost } from '../actions';
+import { addPost, loadPosts, orderPosts } from '../actions';
 import { listCategory } from '../actions';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
@@ -11,8 +11,6 @@ import PostList from './PostList';
 
 class App extends Component {
   state = {
-    categories: [],
-    posts: [],
     postModalOpen: false,
     id: null,
     //timestamp,
@@ -28,10 +26,6 @@ class App extends Component {
     APICategory.getAll().then(categories => {
       this.props.listCategory(categories);
     });
-
-    // APIPost.getAll().then(posts => {
-    //   this.props.listPost(posts);
-    // });
   }
   submitPost = () => {
     this.props.addPost({
@@ -44,20 +38,10 @@ class App extends Component {
       voteScore: 0,
       deleted: false
     });
-
-    //this.input.value = '';
   };
 
-  orderByScore = () => {
-    this.setState({
-      posts: this.props.posts.sort((a, b) => b.voteScore - a.voteScore)
-    });
-  };
-
-  orderByDate = () => {
-    this.setState({
-      posts: this.props.posts.sort((a, b) => b.timestamp - a.timestamp)
-    });
+  orderPosts = sortingType => {
+    this.props.orderPosts(sortingType);
   };
 
   openPostModal = () => this.setState(() => ({ postModalOpen: true }));
@@ -95,10 +79,16 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Readable</h1>
         </header>
-        <button className="icon-btn" onClick={this.orderByScore}>
+        <button
+          className="icon-btn"
+          onClick={() => this.orderPosts('voteScore')}
+        >
           Order by Score
         </button>
-        <button className="icon-btn" onClick={this.orderByDate}>
+        <button
+          className="icon-btn"
+          onClick={() => this.orderPosts('timestamp')}
+        >
           Order by Date
         </button>
         <button className="icon-btn" onClick={this.openPostModal}>
@@ -155,11 +145,13 @@ function mapDispatchToProps(dispatch) {
   return {
     addPost: post => dispatch(addPost(post)),
     listCategory: categories => dispatch(listCategory(categories)),
-    listPost: posts => dispatch(listPost(posts))
+    orderPosts: sortingType => dispatch(orderPosts(sortingType))
   };
 }
 
-function mapStateToProps({ posts, categories }) {
-  return { posts, categories };
+function mapStateToProps({ categories }) {
+  return {
+    categories
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

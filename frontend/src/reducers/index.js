@@ -1,4 +1,4 @@
-import { LIST_CATEGORY, LIST_POST } from '../actions';
+import { LIST_CATEGORY, LOAD_POSTS, ORDER_POSTS } from '../actions';
 import { ADD_POST } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -15,8 +15,17 @@ function posts(state = [], action) {
   switch (action.type) {
     case ADD_POST:
       return state.concat(action.post);
-    case LIST_POST:
+    case LOAD_POSTS:
       return action.posts;
+    default:
+      return state;
+  }
+}
+
+function sorting(state = null, action) {
+  switch (action.type) {
+    case ORDER_POSTS:
+      return action.sortingType;
     default:
       return state;
   }
@@ -24,5 +33,6 @@ function posts(state = [], action) {
 
 export default combineReducers({
   categories,
-  posts
+  posts,
+  sorting
 });

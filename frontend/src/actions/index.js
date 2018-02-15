@@ -2,7 +2,8 @@ export const ADD_POST = 'ADD_POST';
 export const VOTE_POST = 'VOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
-export const LIST_POST = 'LIST_POST';
+export const LOAD_POSTS = 'LOAD_POSTS';
+export const ORDER_POSTS = 'ORDER_POSTS';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
@@ -44,10 +45,17 @@ export function updatePost({ id, title, body, author, category }) {
   };
 }
 
-export function listPost(posts) {
+export function loadPosts(posts) {
   return {
-    type: LIST_POST,
+    type: LOAD_POSTS,
     posts
+  };
+}
+
+export function orderPosts(sortingType) {
+  return {
+    type: ORDER_POSTS,
+    sortingType
   };
 }
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import * as APIPost from '../utils/APIPost';
 import { connect } from 'react-redux';
-import { listPost } from '../actions';
+import { loadPosts } from '../actions';
 
 class PostList extends Component {
   componentDidMount() {
     APIPost.getAll().then(posts => {
-      this.props.listPost(posts);
+      this.props.loadPosts(posts);
     });
   }
 
@@ -23,13 +23,16 @@ class PostList extends Component {
     );
   }
 }
+
 function mapDispatchToProps(dispatch) {
   return {
-    listPost: posts => dispatch(listPost(posts))
+    loadPosts: posts => dispatch(loadPosts(posts))
   };
 }
 
-function mapStateToProps({ posts }) {
-  return { posts };
+function mapStateToProps({ posts, sorting }) {
+  return {
+    posts: posts.slice().sort((a, b) => b[sorting] - a[sorting])
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);
