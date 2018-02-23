@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { addPost } from '../actions';
 import { connect } from 'react-redux';
+import * as APIPost from '../utils/APIPost';
+import UUID from 'uuid/v1';
 
 class NewPost extends Component {
   state = {
@@ -15,15 +17,18 @@ class NewPost extends Component {
   };
 
   submitPost = () => {
-    this.props.addPost({
-      id: 30,
+    const post = {
+      id: UUID(),
       timestamp: Date.now(),
       title: this.state.title,
       body: this.state.body,
       author: this.state.author,
       //category,
-      voteScore: 0,
-      deleted: false
+      voteScore: 0
+    };
+
+    APIPost.insert(post).then(post => {
+      this.props.addPost(post);
     });
   };
 

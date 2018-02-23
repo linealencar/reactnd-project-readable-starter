@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import '../App.css';
 import Home from './Home';
 import Menu from './Menu';
-import { BrowserRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
 import NewPost from './NewPost';
+import { BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   render() {

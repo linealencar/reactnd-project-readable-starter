@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import * as APIPost from '../utils/APIPost';
 import { connect } from 'react-redux';
-import { loadPosts } from '../actions';
 
 class PostList extends Component {
   render() {
