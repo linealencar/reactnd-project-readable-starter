@@ -21,7 +21,7 @@ class Menu extends Component {
         <Link to="/">Home</Link>
         <Link to="/addPost"> Add post </Link>
         {this.props.categories.map(categorie => (
-          <Link key={categorie.name} to="`/${categorie.name}`">
+          <Link key={categorie.name} to={`/${categorie.name}`}>
             {' '}
             {categorie.name}{' '}
           </Link>
