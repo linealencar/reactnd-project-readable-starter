@@ -3,6 +3,7 @@ import * as APIPost from '../utils/APIPost';
 import { loadPosts } from '../actions';
 import { connect } from 'react-redux';
 import PostList from './PostList';
+import Buttons from './Buttons';
 
 class Category extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class Category extends Component {
   render() {
     return (
       <div className="App">
+        <Buttons />
         <PostList />
       </div>
     );

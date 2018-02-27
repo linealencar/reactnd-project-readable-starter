@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as APIPost from '../utils/APIPost';
-import { loadPosts, orderPosts } from '../actions';
+import { loadPosts } from '../actions';
 import { connect } from 'react-redux';
 import PostList from './PostList';
+import Buttons from './Buttons';
 
 class Home extends Component {
   componentDidMount() {
@@ -11,26 +12,10 @@ class Home extends Component {
     });
   }
 
-  orderPosts = sortingType => {
-    this.props.orderPosts(sortingType);
-  };
-
   render() {
     return (
       <div className="App">
-        <button
-          className="icon-btn"
-          onClick={() => this.orderPosts('voteScore')}
-        >
-          Order by Score
-        </button>
-        <button
-          className="icon-btn"
-          onClick={() => this.orderPosts('timestamp')}
-        >
-          Order by Date
-        </button>
-
+        <Buttons />
         <PostList />
       </div>
     );
@@ -39,7 +24,6 @@ class Home extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    orderPosts: sortingType => dispatch(orderPosts(sortingType)),
     loadPosts: posts => dispatch(loadPosts(posts))
   };
 }
