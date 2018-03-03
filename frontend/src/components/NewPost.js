@@ -81,9 +81,6 @@ class NewPost extends Component {
     );
   }
 }
-function mapStateToProps({}) {
-  return {};
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -91,4 +88,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
+export default connect(null, mapDispatchToProps)(NewPost);

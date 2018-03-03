@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import * as APIPost from '../utils/APIPost';
-import { loadPosts } from '../actions';
+import { fetchPosts } from '../actions';
 import { connect } from 'react-redux';
 import PostList from './PostList';
 import Buttons from './Buttons';
 
 class Home extends Component {
   componentDidMount() {
-    APIPost.getAll().then(posts => {
-      this.props.loadPosts(posts);
-    });
+    this.props.fetchPosts();
   }
 
   render() {
@@ -24,11 +22,8 @@ class Home extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: posts => dispatch(loadPosts(posts))
+    fetchPosts: () => dispatch(fetchPosts())
   };
 }
 
-function mapStateToProps() {
-  return {};
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);

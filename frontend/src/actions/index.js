@@ -1,3 +1,5 @@
+import * as APIPost from '../utils/APIPost';
+
 export const ADD_POST = 'ADD_POST';
 export const VOTE_POST = 'VOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
@@ -51,6 +53,9 @@ export function loadPosts(posts) {
     posts
   };
 }
+
+export const fetchPosts = () => dispatch =>
+  APIPost.getAll().then(posts => dispatch(loadPosts(posts)));
 
 export function orderPosts(sortingType) {
   return {
