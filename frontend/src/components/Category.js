@@ -7,11 +7,18 @@ import Buttons from './Buttons';
 
 class Category extends Component {
   componentDidMount() {
-    const { category } = this.props;
+    const { category } = this.props.match.params;
     APIPost.getPostsByCategory(category).then(posts => {
       this.props.loadPosts(posts);
     });
   }
+
+  // componentDidMount() {
+  //   const { category } = this.props;
+  //   APIPost.getPostsByCategory(category).then(posts => {
+  //     this.props.loadPosts(posts);
+  //   });
+  // }
 
   render() {
     return (

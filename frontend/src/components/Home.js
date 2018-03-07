@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as APIPost from '../utils/APIPost';
 import { fetchPosts } from '../actions';
 import { connect } from 'react-redux';
 import PostList from './PostList';

@@ -5,6 +5,7 @@ export const VOTE_POST = 'VOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const LOAD_POSTS = 'LOAD_POSTS';
+export const LOAD_POST = 'LOAD_POST';
 export const ORDER_POSTS = 'ORDER_POSTS';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
@@ -56,6 +57,16 @@ export function loadPosts(posts) {
 
 export const fetchPosts = () => dispatch =>
   APIPost.getAll().then(posts => dispatch(loadPosts(posts)));
+
+export function loadPost(post) {
+  return {
+    type: LOAD_POST,
+    post
+  };
+}
+
+export const fetchPost = postId => dispatch =>
+  APIPost.getPostById(postId).then(postId => dispatch(loadPost(postId)));
 
 export function orderPosts(sortingType) {
   return {
