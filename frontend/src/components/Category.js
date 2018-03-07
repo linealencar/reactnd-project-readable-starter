@@ -13,12 +13,14 @@ class Category extends Component {
     });
   }
 
-  // componentDidMount() {
-  //   const { category } = this.props;
-  //   APIPost.getPostsByCategory(category).then(posts => {
-  //     this.props.loadPosts(posts);
-  //   });
-  // }
+  componentWillReceiveProps(nextProps) {
+    const { category } = nextProps.match.params;
+    if (category !== this.props.match.params.category) {
+      APIPost.getPostsByCategory(category).then(posts => {
+        this.props.loadPosts(posts);
+      });
+    }
+  }
 
   render() {
     return (

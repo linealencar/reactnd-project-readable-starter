@@ -15,7 +15,7 @@ class PostList extends Component {
             {post['timestamp']} <br />
             {post.body} <br />
             {post.voteScore} <br />
-            <Link to="/postDetails">Detail</Link>
+            <Link to={`/postDetails/${post.id}`}>Detail</Link>
           </li>
         ))}
       </ul>

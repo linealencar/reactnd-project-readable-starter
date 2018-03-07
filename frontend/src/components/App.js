@@ -23,7 +23,7 @@ class App extends Component {
           render={() => <Category category="udacity" />}
         /> */}
             <Route path="/:category" component={Category} />
-            {/* <Route path="/postDetail/:postId" render={PostDetail} /> */}
+            <Route path="/postDetail/:postId" component={PostDetail} />
           </div>
         </Switch>
       </BrowserRouter>
