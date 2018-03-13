@@ -1,0 +1,56 @@
+Arguments: 
+  /usr/lib/node/node-v7.5.0-linux-x64/bin/node /usr/share/yarn/bin/yarn.js install
+
+PATH: 
+  /home/aline/bin:/home/aline/.local/bin:/usr/lib/node/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/aline/devel/Oracle/Middleware/wlserver_12.1/common/bin.
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  7.5.0
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "reddit-clone-server",
+    "version": "0.0.1",
+    "description": "A server for the Udacity Reddit Clone project for ReactND",
+    "main": "index.js",
+    "keywords": [
+      "udacity",
+      "redux",
+      "readable",
+      "react"
+    ],
+    "author": "David Harris",
+    "license": "ISC",
+    "dependencies": {
+      "body-parser": "^1.17.1",
+      "cors": "^2.8.3",
+      "dotenv": "^4.0.0",
+      "express": "^4.15.2",
+      "clone": "^2.1.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: https://registry.yarnpkg.com/body-parser: tunneling socket could not be established, cause=connect ECONNREFUSED 10.70.124.16:8080
+      at ClientRequest.onError (/usr/share/yarn/lib/cli.js:146218:17)
+      at Object.onceWrapper (events.js:291:19)
+      at emitOne (events.js:96:13)
+      at ClientRequest.emit (events.js:189:7)
+      at Socket.socketErrorListener (_http_client.js:358:9)
+      at emitOne (events.js:96:13)
+      at Socket.emit (events.js:189:7)
+      at emitErrorNT (net.js:1280:8)
+      at _combinedTickCallback (internal/process/next_tick.js:74:11)
+      at process._tickCallback (internal/process/next_tick.js:98:9)
