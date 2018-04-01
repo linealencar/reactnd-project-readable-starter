@@ -1,4 +1,4 @@
-import { LIST_CATEGORY, LOAD_POSTS, ORDER_POSTS } from '../actions';
+import { LIST_CATEGORY, LOAD_POSTS, ORDER_POSTS, LOAD_POST } from '../actions';
 import { ADD_POST } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -15,6 +15,8 @@ function posts(state = [], action) {
   switch (action.type) {
     case ADD_POST:
       return state.concat(action.post);
+    case LOAD_POST:
+      return action.post;
     case LOAD_POSTS:
       return action.posts;
     default:

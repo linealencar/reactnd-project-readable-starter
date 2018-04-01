@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { List, ListItem } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 
 class PostList extends Component {
   render() {
     const { posts } = this.props;
     return (
-      <ul className="posts">
+      <List>
         {posts.map(post => (
-          <li key={post.id}>
-            {post.title} <br />
-            {post.author} <br />
-            {post.category} <br />
-            {post['timestamp']} <br />
-            {post.body} <br />
-            {post.voteScore} <br />
-            <Link to={`/postDetails/${post.id}`}>Detail</Link>
-          </li>
+          <ListItem
+            primaryText={post.title}
+            secondaryText={post.body}
+            secondaryTextLines={2}
+          />
         ))}
-      </ul>
+      </List>
+      // <ul className="posts">
+      //   {posts.map(post => (
+      //     <li key={post.id}>
+      //       {post.title} <br />
+      //       {post.author} <br />
+      //       {post.category} <br />
+      //       {post['timestamp']} <br />
+      //       {post.body} <br />
+      //       {post.voteScore} <br />
+      //       <Link to={`/postDetail/${post.id}`}>Detail</Link>
+      //     </li>
+      //   ))}
+      // </ul>
     );
   }
 }

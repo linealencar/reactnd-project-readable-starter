@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions';
+import { fetchPost, loadPost } from '../actions';
+import * as APIPost from '../utils/APIPost';
 
 class PostDetail extends Component {
   componentDidMount() {
     const { postId } = this.props.match.params;
-    this.props.fetchPost(postId);
+    APIPost.getPostById(postId).then(post => {
+      this.props.loadPost(post);
+    });
+    // this.props.fetchPost(postId);
+
+    // const { category } = this.props.match.params;
+    // APIPost.getPostsByCategory(category).then(posts => {
+    //   this.props.loadPosts(posts);
+    // });
   }
 
   render() {
@@ -24,16 +33,17 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ post }) {
-  return {
-    post
-  };
-}
+// function mapStateToProps({ post }) {
+//   return {
+//     post
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchPost: postId => dispatch(fetchPost(postId))
+    loadPost: post => dispatch(loadPost(post))
+    // fetchPost: post => dispatch(fetchPost(postId))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+export default connect(null, mapDispatchToProps)(PostDetail);

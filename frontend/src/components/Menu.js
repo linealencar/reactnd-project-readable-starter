@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import * as APICategory from '../utils/APICategory';
-import logo from '../logo.svg';
+import abstract from '../images/abstract.jpg';
 import { listCategory } from '../actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 
 class Menu extends Component {
   componentDidMount() {
@@ -14,17 +16,19 @@ class Menu extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Readable</h1>
-        </header>
-        <Link to="/">Home</Link>
-        <Link to="/addPost"> Add post </Link>
+        <Card>
+          <CardMedia
+            overlay={<CardTitle title="Readable" subtitle="React Project" />}
+          >
+            <img src={abstract} alt="" height="100" />
+          </CardMedia>
+        </Card>
+        <RaisedButton href="/" label="Home" primary={true} />
+        <RaisedButton href="/addPost" label="Add post" secondary={true} />
         {this.props.categories.map(categorie => (
-          <Link key={categorie.name} to={`/${categorie.name}`}>
-            {' '}
+          <RaisedButton href={`/${categorie.name}`}>
             {categorie.name}{' '}
-          </Link>
+          </RaisedButton>
         ))}
       </div>
     );

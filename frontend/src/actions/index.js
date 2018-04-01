@@ -66,7 +66,7 @@ export function loadPost(post) {
 }
 
 export const fetchPost = postId => dispatch =>
-  APIPost.getPostById(postId).then(postId => dispatch(loadPost(postId)));
+  APIPost.getPostById(postId).then(post => dispatch(loadPost(post)));
 
 export function orderPosts(sortingType) {
   return {

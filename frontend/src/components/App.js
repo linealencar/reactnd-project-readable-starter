@@ -6,20 +6,23 @@ import NewPost from './NewPost';
 import Category from './Category';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PostDetail from './PostDetail';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <div>
+        <div>
+          <MuiThemeProvider>
             <Menu />
-            <Route exact path="/" component={Home} />
-            <Route path="/addPost" component={NewPost} />
-            <Route path="/:category" component={Category} />
-            <Route path="/postDetail/:postId" component={PostDetail} />
-          </div>
-        </Switch>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/addPost" component={NewPost} />
+              <Route path="/postDetail/:postId" component={PostDetail} />
+              <Route path="/:category" component={Category} />
+            </Switch>
+          </MuiThemeProvider>
+        </div>
       </BrowserRouter>
     );
   }
