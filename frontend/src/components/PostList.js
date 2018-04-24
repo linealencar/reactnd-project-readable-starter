@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { List, ListItem } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import ActionGrade from 'react-material-icons/icons/action/grade';
+//import Divider from 'material-ui/Divider';
+//import ActionGrade from 'react-material-icons/icons/action/grade';
 import Favorite from 'react-material-icons/icons/action/favorite';
 
 class PostList extends Component {
+  handleClick() {
+    //console.log('Testes');
+    <Redirect to="/addPost" />;
+  }
   render() {
     const { posts } = this.props;
     return (
       <List style={{ width: '40%' }}>
         {posts.map(post => (
           <ListItem
-            primaryText={post.title}
+            key={post.id}
+            primaryText={`/${post.title} - ${post.voteScore}`}
             secondaryText={post.body}
-            secondaryTextLines={2}
+            secondaryTextLines={3}
             rightIcon={<Favorite />}
+            onClick={this.handleClick}
           />
         ))}
       </List>
