@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost, loadPost } from '../actions';
+import { loadPost } from '../actions';
 import * as APIPost from '../utils/APIPost';
-import mui from 'material-ui';
-
-import GradeIcon from 'react-material-icons/icons/action/grade';
 
 class PostDetail extends Component {
   componentDidMount() {

@@ -3,7 +3,6 @@ import * as APICategory from '../utils/APICategory';
 import abstract from '../images/abstract.jpg';
 import { listCategory } from '../actions';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 
@@ -26,7 +25,7 @@ class Menu extends Component {
         <RaisedButton href="/" label="Home" primary={true} />
         <RaisedButton href="/addPost" label="Add post" secondary={true} />
         {this.props.categories.map(categorie => (
-          <RaisedButton href={`/${categorie.name}`}>
+          <RaisedButton key={categorie.name} href={`/${categorie.name}`}>
             {categorie.name}{' '}
           </RaisedButton>
         ))}

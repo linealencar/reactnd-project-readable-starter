@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { List, ListItem } from 'material-ui/List';
 //import Divider from 'material-ui/Divider';
-//import ActionGrade from 'react-material-icons/icons/action/grade';
 import Favorite from 'react-material-icons/icons/action/favorite';
+import { grey400 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+
+const iconButtonElement = (
+  <IconButton touch={true} tooltip="more" tooltipPosition="bottom-left">
+    <MoreVertIcon color={grey400} />
+  </IconButton>
+);
+
+const rightIconMenu = (
+  <IconMenu iconButtonElement={iconButtonElement}>
+    <MenuItem>Detail</MenuItem>
+    <MenuItem>Vote</MenuItem>
+    <MenuItem>Delete</MenuItem>
+  </IconMenu>
+);
 
 class PostList extends Component {
-  handleClick() {
-    //console.log('Testes');
-    <Redirect to="/addPost" />;
-  }
   render() {
     const { posts } = this.props;
     return (
-      <List style={{ width: '40%' }}>
+      <List style={{ width: '60%' }}>
         {posts.map(post => (
           <ListItem
             key={post.id}
-            primaryText={`/${post.title} - ${post.voteScore}`}
+            primaryText={`${post.title} - ${post.voteScore}`}
             secondaryText={post.body}
-            secondaryTextLines={3}
-            rightIcon={<Favorite />}
-            onClick={this.handleClick}
+            secondaryTextLines={2}
+            leftIcon={<Favorite />}
+            rightIconButton={rightIconMenu}
           />
         ))}
       </List>
