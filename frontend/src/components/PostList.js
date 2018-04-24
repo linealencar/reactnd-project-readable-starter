@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
+import ActionGrade from 'react-material-icons/icons/action/grade';
+import Favorite from 'react-material-icons/icons/action/favorite';
 
 class PostList extends Component {
   render() {
     const { posts } = this.props;
     return (
-      <List>
+      <List style={{ width: '40%' }}>
         {posts.map(post => (
           <ListItem
             primaryText={post.title}
             secondaryText={post.body}
             secondaryTextLines={2}
+            rightIcon={<Favorite />}
           />
         ))}
       </List>

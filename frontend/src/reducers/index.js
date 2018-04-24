@@ -1,4 +1,10 @@
-import { LIST_CATEGORY, LOAD_POSTS, ORDER_POSTS, LOAD_POST } from '../actions';
+import {
+  LIST_CATEGORY,
+  LOAD_POSTS,
+  ORDER_POSTS,
+  LOAD_POST,
+  VOTE_POST
+} from '../actions';
 import { ADD_POST } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -19,6 +25,8 @@ function posts(state = [], action) {
       return action.post;
     case LOAD_POSTS:
       return action.posts;
+    case VOTE_POST:
+      return action.post;
     default:
       return state;
   }
