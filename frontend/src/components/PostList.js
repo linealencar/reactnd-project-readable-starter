@@ -8,6 +8,9 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import { withRouter } from 'react-router-dom';
+import { votePost } from '../actions';
+import * as APIPost from '../utils/APIPost';
 
 const iconButtonElement = (
   <IconButton touch={true} tooltip="more" tooltipPosition="bottom-left">
@@ -24,11 +27,22 @@ const rightIconMenu = (
 );
 
 class PostList extends Component {
+  detailPost(id) {
+    this.props.history.push(`/postDetail/${id}`);
+  }
+
+  vote(postId, voteType) {
+    APIPost.votePost(postId, voteType).then(post => {
+      this.props.votePost(post);
+    });
+  }
+  
   render() {
     const { posts } = this.props;
     return (
       <List style={{ width: '60%' }}>
         {posts.map(post => (
+          // <Link to={`/postDetail/${post.id}`}>
           <ListItem
             key={post.id}
             primaryText={`${post.title} - ${post.voteScore}`}
@@ -36,7 +50,10 @@ class PostList extends Component {
             secondaryTextLines={2}
             leftIcon={<Favorite />}
             rightIconButton={rightIconMenu}
+            //onClick={() => this.detailPost(post.id)}
+            onClick={() => this.vote(post.id, 'upVote')}
           />
+          //</Link>
         ))}
       </List>
       // <ul className="posts">
@@ -61,4 +78,13 @@ function mapStateToProps({ posts, sorting }) {
     posts: posts.slice().sort((a, b) => b[sorting] - a[sorting])
   };
 }
-export default connect(mapStateToProps)(PostList);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    votePost: post => dispatch(votePost(post))
+  };
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PostList)
+);
