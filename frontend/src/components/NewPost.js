@@ -3,6 +3,7 @@ import { addPost } from '../actions';
 import { connect } from 'react-redux';
 import * as APIPost from '../utils/APIPost';
 import UUID from 'uuid/v1';
+import TextField from 'material-ui/TextField';
 
 class NewPost extends Component {
   state = {
@@ -51,25 +52,28 @@ class NewPost extends Component {
     return (
       <div className="App">
         <form onSubmit={this.handleSubmit}>
-          <input
+          <TextField
             name="body"
             type="text"
             value={this.state.body}
             onChange={this.handleInputChange}
+            floatingLabelText="Body"
           />
           <br />
-          <input
+          <TextField
             name="title"
             type="text"
             value={this.state.title}
             onChange={this.handleInputChange}
+            floatingLabelText="Title"
           />
           <br />
-          <input
+          <TextField
             name="author"
             type="text"
             value={this.state.author}
             onChange={this.handleInputChange}
+            floatingLabelText="Author"
           />
           <br />
           <input type="submit" value="Submit" />
