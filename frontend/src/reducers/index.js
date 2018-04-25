@@ -22,11 +22,13 @@ function posts(state = [], action) {
     case ADD_POST:
       return state.concat(action.post);
     case LOAD_POST:
-      return action.post;
+      return [action.post];
     case LOAD_POSTS:
       return action.posts;
     case VOTE_POST:
-      return action.post;
+      return state
+        .filter(post => post.id !== action.post.id)
+        .concat(action.post);
     default:
       return state;
   }
