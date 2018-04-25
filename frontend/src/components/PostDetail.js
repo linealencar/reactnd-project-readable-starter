@@ -19,6 +19,7 @@ class PostDetail extends Component {
 
   render() {
     const { post } = this.props;
+    if (!post) return false;
     return (
       <div>
         {post.id}
@@ -33,11 +34,11 @@ class PostDetail extends Component {
   }
 }
 
-// function mapStateToProps({ post }) {
-//   return {
-//     post
-//   };
-// }
+function mapStateToProps({ posts }, { match }) {
+  return {
+    post: posts.find(p => (p.id = match.params.postId))
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -46,4 +47,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(PostDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
