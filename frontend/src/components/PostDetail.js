@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadPost } from '../actions';
 import * as APIPost from '../utils/APIPost';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -24,30 +16,37 @@ class PostDetail extends Component {
     if (!post) return false;
     return (
       <div>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>ID</TableHeaderColumn>
-              <TableHeaderColumn>Title</TableHeaderColumn>
-              <TableHeaderColumn>Author</TableHeaderColumn>
-              <TableHeaderColumn>Category</TableHeaderColumn>
-              <TableHeaderColumn>Timestamp</TableHeaderColumn>
-              <TableHeaderColumn>Body</TableHeaderColumn>
-              <TableHeaderColumn>VoteScore</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableRowColumn>{post.id}</TableRowColumn>
-              <TableRowColumn>{post.title}</TableRowColumn>
-              <TableRowColumn>{post.author}</TableRowColumn>
-              <TableRowColumn>{post.category}</TableRowColumn>
-              <TableRowColumn>{post['timestamp']}</TableRowColumn>
-              <TableRowColumn>{post.body}</TableRowColumn>
-              <TableRowColumn>{post.voteScore}</TableRowColumn>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <table className="postDetail">
+          <caption>Post Detail</caption>
+          <tr>
+            <th>ID</th>
+            <td>{post.id}</td>
+          </tr>
+          <tr>
+            <th>Title</th>
+            <td>{post.title}</td>
+          </tr>
+          <tr>
+            <th>Author</th>
+            <td>{post.author}</td>
+          </tr>
+          <tr>
+            <th>Category</th>
+            <td>{post.category}</td>
+          </tr>
+          <tr>
+            <th>Timestamp</th>
+            <td>{post.timestamp}</td>
+          </tr>
+          <tr>
+            <th>Body</th>
+            <td>{post.body}</td>
+          </tr>
+          <tr>
+            <th>VoteScore</th>
+            <td>{post.voteScore}</td>
+          </tr>
+        </table>
       </div>
     );
   }
