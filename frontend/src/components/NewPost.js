@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import * as APIPost from '../utils/APIPost';
 import UUID from 'uuid/v1';
 import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class NewPost extends Component {
   state = {
     id: null,
-    //timestamp,
     title: '',
     body: '',
     author: ''
     //category,
-    //voteScore,
-    //deleted
   };
 
   submitPost = () => {
@@ -75,6 +74,18 @@ class NewPost extends Component {
             onChange={this.handleInputChange}
             floatingLabelText="Author"
           />
+          <br />
+          <SelectField
+            floatingLabelText="Category"
+            value={this.state.value}
+            onChange={this.handleInputChange}
+          >
+            <MenuItem value={1} primaryText="Never" />
+            <MenuItem value={2} primaryText="Every Night" />
+            <MenuItem value={3} primaryText="Weeknights" />
+            <MenuItem value={4} primaryText="Weekends" />
+            <MenuItem value={5} primaryText="Weekly" />
+          </SelectField>
           <br />
           <input type="submit" value="Submit" />
           <button className="icon-btn" onClick={this.closePostModal}>
