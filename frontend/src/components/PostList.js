@@ -1,30 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List, ListItem } from 'material-ui/List';
-//import Divider from 'material-ui/Divider';
-import Favorite from 'react-material-icons/icons/action/favorite';
-import { grey400 } from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import { withRouter } from 'react-router-dom';
+import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
+import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import { red300, green300 } from 'material-ui/styles/colors';
+import { Link } from 'react-router-dom';
 import { votePost } from '../actions';
 import * as APIPost from '../utils/APIPost';
-
-const iconButtonElement = (
-  <IconButton touch={true} tooltip="more" tooltipPosition="bottom-left">
-    <MoreVertIcon color={grey400} />
-  </IconButton>
-);
-
-const rightIconMenu = (
-  <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem>Detail</MenuItem>
-    <MenuItem>Vote</MenuItem>
-    <MenuItem>Delete</MenuItem>
-  </IconMenu>
-);
+import Badge from 'material-ui/Badge';
 
 class PostList extends Component {
   detailPost(id) {
@@ -36,39 +18,31 @@ class PostList extends Component {
       this.props.votePost(post);
     });
   }
-  
+
   render() {
     const { posts } = this.props;
     return (
-      <List style={{ width: '60%' }}>
+      <ul className="posts">
         {posts.map(post => (
-          // <Link to={`/postDetail/${post.id}`}>
-          <ListItem
-            key={post.id}
-            primaryText={`${post.title} - ${post.voteScore}`}
-            secondaryText={post.body}
-            secondaryTextLines={2}
-            leftIcon={<Favorite />}
-            rightIconButton={rightIconMenu}
-            //onClick={() => this.detailPost(post.id)}
-            onClick={() => this.vote(post.id, 'upVote')}
-          />
-          //</Link>
+          <li key={post.id} className="post">
+            <Badge badgeContent={post.voteScore} primary={true}>
+              <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
+            </Badge>
+            <br />
+            {post.body} <br />
+            <br />
+            <ThumbUp
+              color={green300}
+              onClick={() => this.vote(post.id, 'upVote')}
+            />{' '}
+            <ThumbDown
+              color={red300}
+              onClick={() => this.vote(post.id, 'downVote')}
+            />
+            <br />
+          </li>
         ))}
-      </List>
-      // <ul className="posts">
-      //   {posts.map(post => (
-      //     <li key={post.id}>
-      //       {post.title} <br />
-      //       {post.author} <br />
-      //       {post.category} <br />
-      //       {post['timestamp']} <br />
-      //       {post.body} <br />
-      //       {post.voteScore} <br />
-      //       <Link to={`/postDetail/${post.id}`}>Detail</Link>
-      //     </li>
-      //   ))}
-      // </ul>
+      </ul>
     );
   }
 }
@@ -85,6 +59,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(PostList)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);

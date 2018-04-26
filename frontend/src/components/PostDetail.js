@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadPost } from '../actions';
 import * as APIPost from '../utils/APIPost';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -9,12 +17,6 @@ class PostDetail extends Component {
     APIPost.getPostById(postId).then(post => {
       this.props.loadPost(post);
     });
-    // this.props.fetchPost(postId);
-
-    // const { category } = this.props.match.params;
-    // APIPost.getPostsByCategory(category).then(posts => {
-    //   this.props.loadPosts(posts);
-    // });
   }
 
   render() {
@@ -22,13 +24,30 @@ class PostDetail extends Component {
     if (!post) return false;
     return (
       <div>
-        {post.id}
-        {post.title} <br />
-        {post.author} <br />
-        {post.category} <br />
-        {post['timestamp']} <br />
-        {post.body} <br />
-        {post.voteScore} <br />
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHeaderColumn>ID</TableHeaderColumn>
+              <TableHeaderColumn>Title</TableHeaderColumn>
+              <TableHeaderColumn>Author</TableHeaderColumn>
+              <TableHeaderColumn>Category</TableHeaderColumn>
+              <TableHeaderColumn>Timestamp</TableHeaderColumn>
+              <TableHeaderColumn>Body</TableHeaderColumn>
+              <TableHeaderColumn>VoteScore</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableRowColumn>{post.id}</TableRowColumn>
+              <TableRowColumn>{post.title}</TableRowColumn>
+              <TableRowColumn>{post.author}</TableRowColumn>
+              <TableRowColumn>{post.category}</TableRowColumn>
+              <TableRowColumn>{post['timestamp']}</TableRowColumn>
+              <TableRowColumn>{post.body}</TableRowColumn>
+              <TableRowColumn>{post.voteScore}</TableRowColumn>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
     );
   }
