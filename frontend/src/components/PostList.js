@@ -29,7 +29,7 @@ class PostList extends Component {
               <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
             </Badge>
             <br />
-            {post.body} <br />
+            {post.author} <br />
             <br />
             <ThumbUp
               color={green300}

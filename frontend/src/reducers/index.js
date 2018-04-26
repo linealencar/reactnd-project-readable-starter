@@ -34,7 +34,7 @@ function posts(state = [], action) {
   }
 }
 
-function sorting(state = null, action) {
+function sorting(state = 'voteScore', action) {
   switch (action.type) {
     case ORDER_POSTS:
       return action.sortingType;
