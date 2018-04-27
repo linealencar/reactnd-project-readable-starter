@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { addPost } from '../actions';
+import { addPost, listCategory } from '../actions';
 import { connect } from 'react-redux';
+import * as APICategory from '../utils/APICategory';
 import * as APIPost from '../utils/APIPost';
 import UUID from 'uuid/v1';
 import TextField from 'material-ui/TextField';
@@ -12,9 +13,15 @@ class NewPost extends Component {
     id: null,
     title: '',
     body: '',
-    author: ''
-    //category,
+    author: '',
+    category: ''
   };
+
+  componentDidMount() {
+    APICategory.getAll().then(categories => {
+      this.props.listCategory(categories);
+    });
+  }
 
   submitPost = () => {
     const post = {
@@ -23,7 +30,7 @@ class NewPost extends Component {
       title: this.state.title,
       body: this.state.body,
       author: this.state.author,
-      //category,
+      category: this.state.category,
       voteScore: 0
     };
 
@@ -76,16 +83,22 @@ class NewPost extends Component {
           />
           <br />
           <SelectField
+            name="category"
+            type="select"
             floatingLabelText="Category"
-            value={this.state.value}
+            value={this.state.category}
             onChange={this.handleInputChange}
           >
-            <MenuItem value={1} primaryText="Never" />
-            <MenuItem value={2} primaryText="Every Night" />
-            <MenuItem value={3} primaryText="Weeknights" />
-            <MenuItem value={4} primaryText="Weekends" />
-            <MenuItem value={5} primaryText="Weekly" />
+            {this.props.categories.map(categorie => (
+              <MenuItem
+                value={categorie.name}
+                key={categorie.name}
+                primaryText={categorie.name}
+              />
+            ))}
           </SelectField>
+          <br />
+          <br />
           <br />
           <input type="submit" value="Submit" />
           <button className="icon-btn" onClick={this.closePostModal}>
@@ -97,10 +110,17 @@ class NewPost extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps({ categories }) {
   return {
-    addPost: post => dispatch(addPost(post))
+    categories
   };
 }
 
-export default connect(null, mapDispatchToProps)(NewPost);
+function mapDispatchToProps(dispatch) {
+  return {
+    addPost: post => dispatch(addPost(post)),
+    listCategory: categories => dispatch(listCategory(categories))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
