@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadPost } from '../actions';
 import * as APIPost from '../utils/APIPost';
+import Vote from './Vote';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class PostDetail extends Component {
     const { post } = this.props;
     if (!post) return false;
     return (
-      <div>
+      <div className="App">
         <table className="postDetail">
           <caption>Post Detail</caption>
           <tr>
@@ -47,6 +48,8 @@ class PostDetail extends Component {
             <td>{post.voteScore}</td>
           </tr>
         </table>
+        <br />
+        <Vote postId={post.id} />
       </div>
     );
   }
@@ -61,7 +64,6 @@ function mapStateToProps({ posts }, { match }) {
 function mapDispatchToProps(dispatch) {
   return {
     loadPost: post => dispatch(loadPost(post))
-    // fetchPost: post => dispatch(fetchPost(postId))
   };
 }
 

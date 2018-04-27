@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
-import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
-import { red300, green300 } from 'material-ui/styles/colors';
 import { Link } from 'react-router-dom';
-import { votePost } from '../actions';
 import * as APIPost from '../utils/APIPost';
 import Badge from 'material-ui/Badge';
+import Vote from './Vote';
 
 class PostList extends Component {
   detailPost(id) {
     this.props.history.push(`/postDetail/${id}`);
-  }
-
-  vote(postId, voteType) {
-    APIPost.votePost(postId, voteType).then(post => {
-      this.props.votePost(post);
-    });
   }
 
   render() {
@@ -31,14 +22,7 @@ class PostList extends Component {
             <br />
             {post.author} <br />
             <br />
-            <ThumbUp
-              color={green300}
-              onClick={() => this.vote(post.id, 'upVote')}
-            />{' '}
-            <ThumbDown
-              color={red300}
-              onClick={() => this.vote(post.id, 'downVote')}
-            />
+            <Vote postId={post.id} />
             <br />
           </li>
         ))}
@@ -53,10 +37,4 @@ function mapStateToProps({ posts, sorting }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    votePost: post => dispatch(votePost(post))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, null)(PostList);
