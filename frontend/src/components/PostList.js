@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as APIPost from '../utils/APIPost';
 import Badge from 'material-ui/Badge';
-import Vote from './Vote';
+import Control from './Control';
 
 class PostList extends Component {
   detailPost(id) {
@@ -22,7 +22,7 @@ class PostList extends Component {
             <br />
             {post.author} <br />
             <br />
-            <Vote postId={post.id} />
+            <Control postId={post.id} />
             <br />
           </li>
         ))}

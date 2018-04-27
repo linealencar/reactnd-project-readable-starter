@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadPost } from '../actions';
 import * as APIPost from '../utils/APIPost';
-import Vote from './Vote';
+import Control from './Control';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -49,7 +49,7 @@ class PostDetail extends Component {
           </tr>
         </table>
         <br />
-        <Vote postId={post.id} />
+        <Control postId={post.id} />
       </div>
     );
   }
