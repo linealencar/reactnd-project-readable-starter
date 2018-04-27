@@ -3,9 +3,10 @@ import {
   LOAD_POSTS,
   ORDER_POSTS,
   LOAD_POST,
-  VOTE_POST
+  VOTE_POST,
+  ADD_POST,
+  DELETE_POST
 } from '../actions';
-import { ADD_POST } from '../actions';
 import { combineReducers } from 'redux';
 
 function categories(state = [], action) {
@@ -29,6 +30,8 @@ function posts(state = [], action) {
       return state
         .filter(post => post.id !== action.post.id)
         .concat(action.post);
+    case DELETE_POST:
+      return state.filter(post => post.id !== action.post.id);
     default:
       return state;
   }
