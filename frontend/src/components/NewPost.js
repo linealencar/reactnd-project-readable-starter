@@ -49,6 +49,12 @@ class NewPost extends Component {
     });
   };
 
+  handleSelectChange = (event, index, value) => {
+    this.setState({
+      category: value
+    });
+  };
+
   handleSubmit = event => {
     this.submitPost();
     event.preventDefault();
@@ -87,7 +93,7 @@ class NewPost extends Component {
             type="select"
             floatingLabelText="Category"
             value={this.state.category}
-            onChange={this.handleInputChange}
+            onChange={this.handleSelectChange}
           >
             {this.props.categories.map(categorie => (
               <MenuItem
