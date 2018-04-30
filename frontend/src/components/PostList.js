@@ -19,14 +19,15 @@ class PostList extends Component {
   state = { activeIndex: 0 };
 
   handleClick = (e, titleProps) => {
-    const { index } = titleProps;
+    const { index, active, postId } = titleProps;
 
-    this.props.fetchComments(index);
+    this.props.fetchComments(postId);
 
-    const { activeIndex } = true;
+    const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
+    console.log(newIndex);
 
-    this.setState({ activeIndex: 0 });
+    this.setState({ activeIndex: newIndex });
   };
 
   render() {
@@ -38,8 +39,9 @@ class PostList extends Component {
         {posts.map(post => (
           <div key={post.id}>
             <Accordion.Title
-              active={0}
-              index={post.id}
+              active={activeIndex === 0}
+              index={0}
+              postId={post.id}
               onClick={this.handleClick}
             >
               <Icon name="dropdown" />
@@ -57,6 +59,9 @@ class PostList extends Component {
                   <Comment>
                     <Comment.Content>
                       <Comment.Author as="a">{comment.author}</Comment.Author>
+                      <Comment.Metadata>
+                        <div>{comment.body}</div>
+                      </Comment.Metadata>
                       <Comment.Text>{comment.body}</Comment.Text>
                       <Comment.Actions>
                         <Comment.Action>Reply</Comment.Action>
