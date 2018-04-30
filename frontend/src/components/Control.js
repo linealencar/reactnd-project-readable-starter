@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { votePost, deletePost } from '../actions';
 import * as APIPost from '../utils/APIPost';
-import Icon from 'semantic-ui-react';
 
 class Control extends Component {
   vote(postId, voteType) {

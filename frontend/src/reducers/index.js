@@ -5,7 +5,8 @@ import {
   LOAD_POST,
   VOTE_POST,
   ADD_POST,
-  DELETE_POST
+  DELETE_POST,
+  LOAD_COMMENTS
 } from '../actions';
 import { combineReducers } from 'redux';
 import 'semantic-ui-css/semantic.min.css';
@@ -38,6 +39,15 @@ function posts(state = [], action) {
   }
 }
 
+function comments(state = [], action) {
+  switch (action.type) {
+    case LOAD_COMMENTS:
+      return action.comments;
+    default:
+      return state;
+  }
+}
+
 function sorting(state = 'voteScore', action) {
   switch (action.type) {
     case ORDER_POSTS:
@@ -50,5 +60,6 @@ function sorting(state = 'voteScore', action) {
 export default combineReducers({
   categories,
   posts,
+  comments,
   sorting
 });

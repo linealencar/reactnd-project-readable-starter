@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as APIPost from '../utils/APIPost';
+import { fetchComments } from '../actions';
 import Badge from 'material-ui/Badge';
 import Control from './Control';
 import {
@@ -10,64 +10,80 @@ import {
   Form,
   Header,
   List,
-  ListContent
+  ListContent,
+  Accordion,
+  Icon
 } from 'semantic-ui-react';
 
 class PostList extends Component {
-  detailPost(id) {
-    this.props.history.push(`/postDetail/${id}`);
-  }
+  state = { activeIndex: 0 };
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps;
+
+    this.props.fetchComments(index);
+
+    const { activeIndex } = true;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    this.setState({ activeIndex: 0 });
+  };
 
   render() {
-    const { posts } = this.props;
+    const { activeIndex } = this.state;
+    const { posts, comments } = this.props;
+    console.log(comments);
     return (
-      <List divided relaxed>
+      <Accordion fluid styled>
         {posts.map(post => (
-          <List.Item key={post.id}>
-            <List.Icon
-              name="genderless"
-              color="grey"
-              size="large"
-              verticalAlign="middle"
-            />
-            <List.Content>
-              <List.Header as="a">
-                {/* <Badge badgeContent={post.voteScore} primary={true}> */}
-                <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
-                {/* </Badge> */}
-              </List.Header>
-              <List.Description as="a">{post.author} </List.Description>
-            </List.Content>
-            <br />
-            <Control postId={post.id} />
-            <Comment.Group>
-              <Header as="h3" dividing>
-                Comments
-              </Header>
-              <Comment>
-                <Comment.Content>
-                  <Comment.Author as="a">Matt</Comment.Author>
-                  <Comment.Metadata>
-                    <div>Today at 5:42PM</div>
-                  </Comment.Metadata>
-                  <Comment.Text>How artistic!</Comment.Text>
-                  <Comment.Actions>
-                    <Comment.Action>Reply</Comment.Action>
-                  </Comment.Actions>
-                </Comment.Content>
-              </Comment>
-            </Comment.Group>
-          </List.Item>
+          <div key={post.id}>
+            <Accordion.Title
+              active={0}
+              index={post.id}
+              onClick={this.handleClick}
+            >
+              <Icon name="dropdown" />
+              <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
+            </Accordion.Title>
+
+            <Accordion.Content active={activeIndex === 0}>
+              <p>{post.author}</p>
+              <Control postId={post.id} />
+              <Comment.Group>
+                <Header as="h3" dividing>
+                  Comments
+                </Header>
+                {comments.map(comment => (
+                  <Comment>
+                    <Comment.Content>
+                      <Comment.Author as="a">{comment.author}</Comment.Author>
+                      <Comment.Text>{comment.body}</Comment.Text>
+                      <Comment.Actions>
+                        <Comment.Action>Reply</Comment.Action>
+                      </Comment.Actions>
+                    </Comment.Content>
+                  </Comment>
+                ))}
+              </Comment.Group>
+            </Accordion.Content>
+          </div>
         ))}
-      </List>
+      </Accordion>
     );
   }
 }
 
-function mapStateToProps({ posts, sorting }) {
+function mapStateToProps({ posts, comments, sorting }) {
   return {
-    posts: posts.slice().sort((a, b) => b[sorting] - a[sorting])
+    posts: posts.slice().sort((a, b) => b[sorting] - a[sorting]),
+    comments
   };
 }
 
-export default connect(mapStateToProps, null)(PostList);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchComments: postId => dispatch(fetchComments(postId))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);

@@ -12,7 +12,7 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
-export const LIST_COMMENT = 'LIST_COMMENT';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 
 export const LIST_CATEGORY = 'LIST_CATEGORY';
 
@@ -105,11 +105,17 @@ export function updateComment({ id, body, author }) {
   };
 }
 
-export function listComment() {
+export function loadComments(comments) {
   return {
-    type: LIST_COMMENT
+    type: LOAD_COMMENTS,
+    comments
   };
 }
+
+export const fetchComments = postId => dispatch =>
+  APIPost.getAllComments(postId).then(comments =>
+    dispatch(loadComments(comments))
+  );
 
 export function listCategory(categories) {
   return {

@@ -7,6 +7,7 @@ import Control from './Control';
 class PostDetail extends Component {
   componentDidMount() {
     const { postId } = this.props.match.params;
+
     APIPost.getPostById(postId).then(post => {
       this.props.loadPost(post);
     });
