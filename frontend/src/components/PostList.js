@@ -4,6 +4,14 @@ import { Link } from 'react-router-dom';
 import * as APIPost from '../utils/APIPost';
 import Badge from 'material-ui/Badge';
 import Control from './Control';
+import {
+  Button,
+  Comment,
+  Form,
+  Header,
+  List,
+  ListContent
+} from 'semantic-ui-react';
 
 class PostList extends Component {
   detailPost(id) {
@@ -13,20 +21,45 @@ class PostList extends Component {
   render() {
     const { posts } = this.props;
     return (
-      <ul className="posts">
+      <List divided relaxed>
         {posts.map(post => (
-          <li key={post.id} className="post">
-            <Badge badgeContent={post.voteScore} primary={true}>
-              <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
-            </Badge>
-            <br />
-            {post.author} <br />
+          <List.Item key={post.id}>
+            <List.Icon
+              name="genderless"
+              color="grey"
+              size="large"
+              verticalAlign="middle"
+            />
+            <List.Content>
+              <List.Header as="a">
+                {/* <Badge badgeContent={post.voteScore} primary={true}> */}
+                <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
+                {/* </Badge> */}
+              </List.Header>
+              <List.Description as="a">{post.author} </List.Description>
+            </List.Content>
             <br />
             <Control postId={post.id} />
-            <br />
-          </li>
+            <Comment.Group>
+              <Header as="h3" dividing>
+                Comments
+              </Header>
+              <Comment>
+                <Comment.Content>
+                  <Comment.Author as="a">Matt</Comment.Author>
+                  <Comment.Metadata>
+                    <div>Today at 5:42PM</div>
+                  </Comment.Metadata>
+                  <Comment.Text>How artistic!</Comment.Text>
+                  <Comment.Actions>
+                    <Comment.Action>Reply</Comment.Action>
+                  </Comment.Actions>
+                </Comment.Content>
+              </Comment>
+            </Comment.Group>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     );
   }
 }

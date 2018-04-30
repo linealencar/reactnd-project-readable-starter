@@ -8,6 +8,7 @@ import {
   DELETE_POST
 } from '../actions';
 import { combineReducers } from 'redux';
+import 'semantic-ui-css/semantic.min.css';
 
 function categories(state = [], action) {
   switch (action.type) {
