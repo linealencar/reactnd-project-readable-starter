@@ -6,7 +6,8 @@ import {
   VOTE_POST,
   ADD_POST,
   DELETE_POST,
-  LOAD_COMMENTS
+  LOAD_COMMENTS,
+  ADD_COMMENT
 } from '../actions';
 import { combineReducers } from 'redux';
 import 'semantic-ui-css/semantic.min.css';
@@ -43,6 +44,8 @@ function comments(state = [], action) {
   switch (action.type) {
     case LOAD_COMMENTS:
       return action.comments;
+    case ADD_COMMENT:
+      return state.concat(action.comment);
     default:
       return state;
   }

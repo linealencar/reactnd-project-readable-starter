@@ -75,7 +75,7 @@ export function orderPosts(sortingType) {
   };
 }
 
-export function addComment({ comment }) {
+export function addComment(comment) {
   return {
     type: ADD_COMMENT,
     comment

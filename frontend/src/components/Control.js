@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { votePost, deletePost } from '../actions';
+import { votePost, deletePost, addComment } from '../actions';
 import * as APIPost from '../utils/APIPost';
+import { Icon } from 'semantic-ui-react';
 
 class Control extends Component {
+  state = {
+    opened: false
+  };
+
   vote(postId, voteType) {
     APIPost.votePost(postId, voteType).then(post => {
       this.props.votePost(post);
@@ -16,24 +21,43 @@ class Control extends Component {
     });
   }
 
+  toggleComment = () => {
+    // check if box is currently opened
+    const { opened } = this.state;
+    this.setState({
+      // toggle value of `opened`
+      opened: !opened
+    });
+  };
+
+  // addComment = () => {
+  //   this.props.addComment();
+  // };
+
   render() {
-    const { postId } = this.props;
+    const { postId, onToggleComment } = this.props;
 
     return (
       <div>
-        <i
-          class="thumbs down outline icon bordered"
+        <Icon
+          circular
+          color="teal"
+          name="thumbs down"
           onClick={() => this.vote(postId, 'downVote')}
         />
-        <i
-          class="thumbs up outline icon bordered"
+        <Icon
+          circular
+          color="teal"
+          name="thumbs up"
           onClick={() => this.vote(postId, 'upVote')}
         />
-        <i
-          class="trash alternate outline icon bordered"
+        <Icon
+          circular
+          color="teal"
+          name="trash"
           onClick={() => this.deletePost(postId)}
         />
-        <i class="comment alternate outline icon bordered" />
+        <Icon circular color="teal" name="comment" onClick={onToggleComment} />
         <br />
       </div>
     );
