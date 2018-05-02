@@ -1,4 +1,5 @@
 import * as APIPost from '../utils/APIPost';
+import * as APIComment from '../utils/APIComment';
 
 export const ADD_POST = 'ADD_POST';
 export const VOTE_POST = 'VOTE_POST';
@@ -83,7 +84,9 @@ export function addComment(comment) {
 }
 
 export const insertComment = comment => dispatch =>
-  APIPost.insertComment(comment).then(comment => dispatch(addComment(comment)));
+  APIComment.insertComment(comment).then(comment =>
+    dispatch(addComment(comment))
+  );
 
 export function voteComment({ id }) {
   return {
@@ -116,7 +119,7 @@ export function loadComments(comments) {
 }
 
 export const fetchComments = postId => dispatch =>
-  APIPost.getAllComments(postId).then(comments =>
+  APIComment.getAllComments(postId).then(comments =>
     dispatch(loadComments(comments))
   );
 

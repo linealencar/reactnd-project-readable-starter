@@ -51,18 +51,3 @@ export const votePost = (postId, vote) =>
     },
     body: JSON.stringify({ option: vote })
   }).then(res => res.json());
-
-export const getAllComments = postId =>
-  fetch(`${api}/posts/${postId}/comments`, { headers })
-    .then(res => res.json())
-    .then(data => data);
-
-export const insertComment = comment =>
-  fetch(`${api}/comments`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(comment)
-  }).then(res => res.json());
