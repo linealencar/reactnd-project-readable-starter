@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadPost, fetchComments } from '../actions';
+import { loadPost, fetchComments, insertComment } from '../actions';
 import * as APIPost from '../utils/APIPost';
 import Control from './Control';
 import { Button, Comment, Form, Header, Accordion } from 'semantic-ui-react';
@@ -8,8 +8,13 @@ import UUID from 'uuid/v1';
 
 class PostDetail extends Component {
   state = {
-    opened: false
+    opened: false,
+    id: null,
+    parentId: null,
+    body: '',
+    author: ''
   };
+
   componentDidMount() {
     const { postId } = this.props.match.params;
 
@@ -20,31 +25,31 @@ class PostDetail extends Component {
     this.props.fetchComments(postId);
   }
 
+  handleInputChange = (e, { name, value }) => this.setState({ [name]: value });
+
   submitComment = () => {
+    const { post } = this.props;
     const comment = {
       id: UUID(),
+      parentId: post.id,
       timestamp: Date.now(),
-      // title: this.state.title,
-      // body: this.state.body,
-      // author: this.state.author,
-      // category: this.state.category,
+      body: this.state.body,
+      author: this.state.author,
       voteScore: 0
     };
+    //console.log(comment);
 
-    // APIPost.insert(post).then(post => {
-    //   this.props.addPost(post);
-    // });
+    this.props.insertComment(comment);
   };
 
   handleSubmit = event => {
-    this.submitPost();
+    this.submitComment();
     event.preventDefault();
   };
 
   toggleComment = () => {
     // check if box is currently opened
     const { opened } = this.state;
-    console.log('Opened ' + opened);
     this.setState({
       // toggle value of `opened`
       opened: !opened
@@ -76,13 +81,22 @@ class PostDetail extends Component {
 
                 {opened && (
                   <Form reply onSubmit={this.handleSubmit}>
-                    <Form.TextArea />
-                    <Button
-                      content="Add Reply"
-                      labelPosition="left"
-                      icon="edit"
-                      primary
+                    <Form.TextArea
+                      placeholder="Comment here"
+                      name="body"
+                      value={this.state.body}
+                      onChange={this.handleInputChange}
                     />
+                    <Form.Field>
+                      <label>Author: </label>
+                      <Form.Input
+                        placeholder="Author"
+                        name="author"
+                        value={this.state.author}
+                        onChange={this.handleInputChange}
+                      />
+                    </Form.Field>
+                    <Form.Button content="Submit" />
                   </Form>
                 )}
                 {comments.map(comment => (
@@ -118,7 +132,8 @@ function mapStateToProps({ posts, comments }, { match }) {
 function mapDispatchToProps(dispatch) {
   return {
     loadPost: post => dispatch(loadPost(post)),
-    fetchComments: postId => dispatch(fetchComments(postId))
+    fetchComments: postId => dispatch(fetchComments(postId)),
+    insertComment: comment => dispatch(insertComment(comment))
   };
 }
 

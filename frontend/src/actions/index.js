@@ -82,6 +82,9 @@ export function addComment(comment) {
   };
 }
 
+export const insertComment = comment => dispatch =>
+  APIPost.insertComment(comment).then(comment => dispatch(addComment(comment)));
+
 export function voteComment({ id }) {
   return {
     type: VOTE_COMMENT,

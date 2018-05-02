@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchComments } from '../actions';
 import Badge from 'material-ui/Badge';
 import Control from './Control';
-import {
-  Button,
-  Comment,
-  Form,
-  Header,
-  List,
-  ListContent,
-  Accordion,
-  Icon
-} from 'semantic-ui-react';
+import { Accordion, Icon } from 'semantic-ui-react';
 
 class PostList extends Component {
   state = { activeIndex: 0 };
@@ -28,7 +18,7 @@ class PostList extends Component {
 
   render() {
     const { activeIndex } = this.state;
-    const { posts, comments } = this.props;
+    const { posts } = this.props;
     return (
       <Accordion fluid styled>
         {posts.map(post => (
