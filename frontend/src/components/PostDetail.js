@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadPost, fetchComments, insertComment } from '../actions';
+import { loadPost, fetchComments } from '../actions';
 import * as APIPost from '../utils/APIPost';
 import Control from './Control';
-import { Button, Comment, Form, Header, Accordion } from 'semantic-ui-react';
-import UUID from 'uuid/v1';
+import CommentList from './CommentList';
+import { Accordion } from 'semantic-ui-react';
 
 class PostDetail extends Component {
   state = {
-    opened: false,
-    id: null,
-    parentId: null,
-    body: '',
-    author: ''
+    opened: false
   };
 
   componentDidMount() {
@@ -25,28 +21,6 @@ class PostDetail extends Component {
     this.props.fetchComments(postId);
   }
 
-  handleInputChange = (e, { name, value }) => this.setState({ [name]: value });
-
-  submitComment = () => {
-    const { post } = this.props;
-    const comment = {
-      id: UUID(),
-      parentId: post.id,
-      timestamp: Date.now(),
-      body: this.state.body,
-      author: this.state.author,
-      voteScore: 0
-    };
-    //console.log(comment);
-
-    this.props.insertComment(comment);
-  };
-
-  handleSubmit = event => {
-    this.submitComment();
-    event.preventDefault();
-  };
-
   toggleComment = () => {
     // check if box is currently opened
     const { opened } = this.state;
@@ -57,7 +31,7 @@ class PostDetail extends Component {
   };
 
   render() {
-    const { post, comments } = this.props;
+    const { post } = this.props;
     const { opened } = this.state;
     if (!post) return false;
     return (
@@ -74,46 +48,7 @@ class PostDetail extends Component {
               <p>Category: {post.category}</p>
               <p>Timestamp: {post.timestamp}</p>
               <p>Vote score:{post.voteScore}</p>
-              <Comment.Group>
-                <Header as="h3" dividing>
-                  Comments
-                </Header>
-
-                {opened && (
-                  <Form reply onSubmit={this.handleSubmit}>
-                    <Form.TextArea
-                      placeholder="Comment here"
-                      name="body"
-                      value={this.state.body}
-                      onChange={this.handleInputChange}
-                    />
-                    <Form.Field>
-                      <label>Author: </label>
-                      <Form.Input
-                        placeholder="Author"
-                        name="author"
-                        value={this.state.author}
-                        onChange={this.handleInputChange}
-                      />
-                    </Form.Field>
-                    <Form.Button content="Submit" />
-                  </Form>
-                )}
-                {comments.map(comment => (
-                  <Comment key={comment.id}>
-                    <Comment.Content>
-                      <Comment.Author as="a">{comment.author}</Comment.Author>
-                      <Comment.Metadata>
-                        <div>{comment.body}</div>
-                      </Comment.Metadata>
-                      <Comment.Text>{comment.body}</Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
-                ))}
-              </Comment.Group>
+              <CommentList replyOpened={opened} postId={post.id} />
             </Accordion.Content>
           </div>
         </Accordion>
@@ -132,8 +67,7 @@ function mapStateToProps({ posts, comments }, { match }) {
 function mapDispatchToProps(dispatch) {
   return {
     loadPost: post => dispatch(loadPost(post)),
-    fetchComments: postId => dispatch(fetchComments(postId)),
-    insertComment: comment => dispatch(insertComment(comment))
+    fetchComments: postId => dispatch(fetchComments(postId))
   };
 }
 
