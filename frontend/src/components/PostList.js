@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Badge from 'material-ui/Badge';
 import Control from './Control';
-import { Accordion, Icon } from 'semantic-ui-react';
+import { Accordion, Icon, Statistic } from 'semantic-ui-react';
 
 class PostList extends Component {
   state = { activeIndex: 0 };
@@ -26,13 +25,19 @@ class PostList extends Component {
             <Accordion.Title
               active={activeIndex === 0}
               index={0}
-              postid={post.id}
-              onClick={this.handleClick}
+              // onClick={this.handleClick}
             >
-              <Icon name="dropdown" />{' '}
-              <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
               <br />
+              {/* <Icon name="dropdown" />{' '} */}
+              <Statistic size="mini" color="grey">
+                <Statistic.Value>
+                  <Icon name="heart" />
+                  {post.voteScore}
+                </Statistic.Value>
+              </Statistic>
               <Control postId={post.id} showAddComment={true} />
+              <br />
+              <Link to={`/postDetail/${post.id}`}>{post.title}</Link> <br />
             </Accordion.Title>
 
             <Accordion.Content active={activeIndex === 0}>

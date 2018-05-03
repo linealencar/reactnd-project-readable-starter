@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { voteComment, deleteComment } from '../actions';
-import * as APIComment from '../utils/APIComment';
 import { Icon } from 'semantic-ui-react';
 
 class ControlComment extends Component {

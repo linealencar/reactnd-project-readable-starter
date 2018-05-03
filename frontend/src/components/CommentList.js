@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Comment, Form, Header } from 'semantic-ui-react';
+import { Comment, Form, Header, Statistic, Icon } from 'semantic-ui-react';
 import { insertComment } from '../actions';
 import UUID from 'uuid/v1';
 import ControlComment from './ControlComment';
@@ -65,9 +65,15 @@ class CommentList extends Component {
         {comments.map(comment => (
           <Comment key={comment.id}>
             <Comment.Content>
+              <Statistic size="mini" color="grey">
+                <Statistic.Value>
+                  <Icon name="heart" />
+                  {comment.voteScore}
+                </Statistic.Value>
+              </Statistic>
+              <br />
               <Comment.Author as="a">{comment.author}</Comment.Author>
               <Comment.Metadata>
-                <div>{comment.voteScore}</div>
                 <ControlComment commentId={comment.id} />
               </Comment.Metadata>
               <Comment.Text>{comment.body}</Comment.Text>

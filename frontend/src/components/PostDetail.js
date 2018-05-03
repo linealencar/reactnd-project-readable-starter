@@ -4,7 +4,7 @@ import { loadPost, fetchComments } from '../actions';
 import * as APIPost from '../utils/APIPost';
 import Control from './Control';
 import CommentList from './CommentList';
-import { Accordion } from 'semantic-ui-react';
+import { Accordion, Statistic, Icon } from 'semantic-ui-react';
 
 class PostDetail extends Component {
   state = {
@@ -39,15 +39,31 @@ class PostDetail extends Component {
         <Accordion fluid styled>
           <div key={post.id}>
             <Accordion.Title active={true} index={0}>
-              {post.title}
+              <Statistic size="mini" color="grey">
+                <Statistic.Value>
+                  <Icon name="heart" />
+                  {post.voteScore}
+                </Statistic.Value>
+              </Statistic>
+              <br />
+              {post.title} <a class="ui teal tag label">{post.category}</a>
             </Accordion.Title>
-            <Control postId={post.id} onToggleComment={this.toggleComment} />
             <Accordion.Content active={true}>
-              <p>Title: {post.author}</p>
-              <p>Body: {post.body}</p>
-              <p>Category: {post.category}</p>
-              <p>Timestamp: {post.timestamp}</p>
-              <p>Vote score:{post.voteScore}</p>
+              <Control postId={post.id} onToggleComment={this.toggleComment} />
+              <div class="ui divided selection list">
+                <a class="item">
+                  <div class="ui teal horizontal label">Author</div>
+                  {post.author}
+                </a>
+                <a class="item">
+                  <div class="ui teal horizontal label">Body</div>
+                  {post.body}{' '}
+                </a>
+                <a class="item">
+                  <div class="ui teal horizontal label">Timestamp</div>
+                  {post.timestamp}
+                </a>
+              </div>
               <CommentList replyOpened={opened} postId={post.id} />
             </Accordion.Content>
           </div>

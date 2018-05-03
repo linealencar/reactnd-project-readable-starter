@@ -53,7 +53,7 @@ class Control extends Component {
           name="trash"
           onClick={() => this.deletePost(postId)}
         />
-        <Icon circular color="teal" name="comment" onClick={onToggleComment} />
+        {/* <Icon circular color="teal" name="comment" onClick={onToggleComment} /> */}
         <br />
       </div>
     );
