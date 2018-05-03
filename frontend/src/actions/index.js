@@ -88,12 +88,17 @@ export const insertComment = comment => dispatch =>
     dispatch(addComment(comment))
   );
 
-export function voteComment({ id }) {
+export function voteCommentFunction(comment) {
   return {
     type: VOTE_COMMENT,
-    id
+    comment
   };
 }
+
+export const voteComment = (commentId, voteType) => dispatch =>
+  APIComment.voteComment(commentId, voteType).then(comment =>
+    dispatch(voteCommentFunction(comment))
+  );
 
 export function deleteComment({ id }) {
   return {

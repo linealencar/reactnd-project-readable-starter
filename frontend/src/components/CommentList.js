@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Comment, Form, Header } from 'semantic-ui-react';
 import { insertComment } from '../actions';
-
 import UUID from 'uuid/v1';
+import ControlComment from './ControlComment';
 
 class CommentList extends Component {
   state = {
@@ -67,7 +67,8 @@ class CommentList extends Component {
             <Comment.Content>
               <Comment.Author as="a">{comment.author}</Comment.Author>
               <Comment.Metadata>
-                <div>{comment.body}</div>
+                <div>{comment.voteScore}</div>
+                <ControlComment commentId={comment.id} />
               </Comment.Metadata>
               <Comment.Text>{comment.body}</Comment.Text>
             </Comment.Content>
