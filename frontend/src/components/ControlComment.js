@@ -9,20 +9,10 @@ class ControlComment extends Component {
     this.props.voteComment(commentId, voteType);
   }
 
-  // deletePost(postId) {
-  //   APIPost.deletePost(postId).then(post => {
-  //     this.props.deletePost(post);
-  //   });
-  // }
-
-  // toggleComment = () => {
-  //   // check if box is currently opened
-  //   const { opened } = this.state;
-  //   this.setState({
-  //     // toggle value of `opened`
-  //     opened: !opened
-  //   });
-  // };
+  delete(commentId) {
+    console.log(commentId);
+    this.props.deleteComment(commentId);
+  }
 
   render() {
     const { commentId } = this.props;
@@ -42,14 +32,8 @@ class ControlComment extends Component {
         <Icon
           color="teal"
           name="trash"
-          //onClick={() => this.deletePost(postId)}
+          onClick={() => this.delete(commentId)}
         />
-        <Icon
-          color="teal"
-          name="comment"
-          //onClick={onToggleComment}
-        />
-        <br />
       </div>
     );
   }
@@ -58,8 +42,8 @@ class ControlComment extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     voteComment: (commentId, voteType) =>
-      dispatch(voteComment(commentId, voteType))
-    //deletePost: post => dispatch(deletePost(post))
+      dispatch(voteComment(commentId, voteType)),
+    deleteComment: commentId => dispatch(deleteComment(commentId))
   };
 }
 

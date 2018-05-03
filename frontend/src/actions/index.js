@@ -100,12 +100,17 @@ export const voteComment = (commentId, voteType) => dispatch =>
     dispatch(voteCommentFunction(comment))
   );
 
-export function deleteComment({ id }) {
+export function deleteCommentFunction(comment) {
   return {
     type: DELETE_COMMENT,
-    id
+    comment
   };
 }
+
+export const deleteComment = commentId => dispatch =>
+  APIComment.deleteComment(commentId).then(comment =>
+    dispatch(deleteCommentFunction(comment))
+  );
 
 export function updateComment({ id, body, author }) {
   return {
