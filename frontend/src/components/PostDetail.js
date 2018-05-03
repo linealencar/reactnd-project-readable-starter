@@ -31,7 +31,7 @@ class PostDetail extends Component {
   };
 
   render() {
-    const { post } = this.props;
+    const { post, comments } = this.props;
     const { opened } = this.state;
     if (!post) return false;
     return (
@@ -46,21 +46,22 @@ class PostDetail extends Component {
                 </Statistic.Value>
               </Statistic>
               <br />
-              {post.title} <a class="ui teal tag label">{post.category}</a>
+              {post.title}
+              <a class="ui teal tag label">{post.category}</a>
             </Accordion.Title>
             <Accordion.Content active={true}>
               <Control postId={post.id} onToggleComment={this.toggleComment} />
-              <div class="ui divided selection list">
-                <a class="item">
-                  <div class="ui teal horizontal label">Author</div>
+              <div className="ui divided selection list">
+                <a className="item">
+                  <div className="ui teal horizontal label">Author</div>
                   {post.author}
                 </a>
-                <a class="item">
-                  <div class="ui teal horizontal label">Body</div>
+                <a className="item">
+                  <div className="ui teal horizontal label">Body</div>
                   {post.body}{' '}
                 </a>
-                <a class="item">
-                  <div class="ui teal horizontal label">Timestamp</div>
+                <a className="item">
+                  <div className="ui teal horizontal label">Timestamp</div>
                   {post.timestamp}
                 </a>
               </div>

@@ -39,7 +39,7 @@ class CommentList extends Component {
     return (
       <Comment.Group>
         <Header as="h3" dividing>
-          Comments
+          Comments<a class="ui red circular label">{comments.length}</a>
         </Header>
 
         {replyOpened && (

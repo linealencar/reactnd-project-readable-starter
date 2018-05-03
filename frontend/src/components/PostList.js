@@ -17,7 +17,7 @@ class PostList extends Component {
 
   render() {
     const { activeIndex } = this.state;
-    const { posts } = this.props;
+    const { posts, comments } = this.props;
     return (
       <Accordion fluid styled>
         {posts.map(post => (
@@ -37,7 +37,8 @@ class PostList extends Component {
               </Statistic>
               <Control postId={post.id} showAddComment={true} />
               <br />
-              <Link to={`/postDetail/${post.id}`}>{post.title}</Link> <br />
+              <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
+              <br />
             </Accordion.Title>
 
             <Accordion.Content active={activeIndex === 0}>
