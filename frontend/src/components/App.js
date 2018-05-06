@@ -7,6 +7,7 @@ import Category from './Category';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PostDetail from './PostDetail';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Header from './Header';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <MuiThemeProvider>
+            <Header />
             <Menu />
             <Switch>
               <Route exact path="/" component={Home} />

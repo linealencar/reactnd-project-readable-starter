@@ -14,14 +14,7 @@ class Menu extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <Card>
-          <CardMedia
-            overlay={<CardTitle title="Readable" subtitle="React Project" />}
-          >
-            <img src={abstract} alt="" height="100" />
-          </CardMedia>
-        </Card>
+      <div>
         <RaisedButton href="/" label="Home" primary={true} />
         <RaisedButton href="/addPost" label="Add post" secondary={true} />
         {this.props.categories.map(categorie => (
