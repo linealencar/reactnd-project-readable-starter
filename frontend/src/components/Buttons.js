@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { orderPosts } from '../actions';
 import { connect } from 'react-redux';
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
 
 class Buttons extends Component {
   orderPosts = sortingType => {
@@ -26,6 +24,8 @@ class Buttons extends Component {
             Order by Date
           </button>
         </div>
+        <br />
+        <br />
       </div>
     );
   }
