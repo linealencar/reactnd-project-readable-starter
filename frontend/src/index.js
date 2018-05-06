@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-
+import 'semantic-ui-css/semantic.min.css';
 const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render(

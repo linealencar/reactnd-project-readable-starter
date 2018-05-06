@@ -12,7 +12,6 @@ import {
   DELETE_COMMENT
 } from '../actions';
 import { combineReducers } from 'redux';
-import 'semantic-ui-css/semantic.min.css';
 
 function categories(state = [], action) {
   switch (action.type) {

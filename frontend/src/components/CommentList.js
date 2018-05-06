@@ -23,8 +23,7 @@ class CommentList extends Component {
       parentId: postId,
       timestamp: Date.now(),
       body: this.state.body,
-      author: this.state.author,
-      voteScore: 0
+      author: this.state.author
     };
     this.props.insertComment(comment);
   };

@@ -30,8 +30,7 @@ class NewPost extends Component {
       title: this.state.title,
       body: this.state.body,
       author: this.state.author,
-      category: this.state.category,
-      voteScore: 0
+      category: this.state.category
     };
 
     APIPost.insert(post).then(post => {

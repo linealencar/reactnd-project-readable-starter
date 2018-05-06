@@ -5,6 +5,7 @@ import * as APIPost from '../utils/APIPost';
 import Control from './Control';
 import CommentList from './CommentList';
 import { Accordion, Statistic, Icon } from 'semantic-ui-react';
+import Timestamp from 'react-timestamp';
 
 class PostDetail extends Component {
   state = {
@@ -56,13 +57,10 @@ class PostDetail extends Component {
                   <div className="ui teal horizontal label">Author</div>
                   {post.author}
                 </a>
+                <a className="item">{post.body} </a>
                 <a className="item">
-                  <div className="ui teal horizontal label">Body</div>
-                  {post.body}{' '}
-                </a>
-                <a className="item">
-                  <div className="ui teal horizontal label">Timestamp</div>
-                  {post.timestamp}
+                  <div className="ui teal horizontal label">Date</div>
+                  <Timestamp time={post.timestamp} format="date" />
                 </a>
               </div>
               <CommentList replyOpened={opened} postId={post.id} />
