@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import * as APICategory from '../utils/APICategory';
-import abstract from '../images/abstract.jpg';
 import { listCategory } from '../actions';
 import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 
 class Menu extends Component {
   componentDidMount() {
@@ -14,13 +11,17 @@ class Menu extends Component {
   }
   render() {
     return (
-      <div>
-        <RaisedButton href="/" label="Home" primary={true} />
-        <RaisedButton href="/addPost" label="Add post" secondary={true} />
+      <div class="ui pointing menu">
+        <a href="/" class="item">
+          Home{' '}
+        </a>
+        <a href="/addPost" class="item">
+          Add post
+        </a>
         {this.props.categories.map(categorie => (
-          <RaisedButton key={categorie.name} href={`/${categorie.name}`}>
-            {categorie.name}{' '}
-          </RaisedButton>
+          <a href={`/${categorie.name}`} key={categorie.name} class="item">
+            {categorie.name}
+          </a>
         ))}
       </div>
     );

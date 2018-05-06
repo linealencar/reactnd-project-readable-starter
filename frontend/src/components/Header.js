@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Icon } from 'semantic-ui-react';
 
 class Header extends Component {
   render() {
     return (
       <h2 class="ui block header">
-        <i class="book icon" />
+        <Icon color="teal" name="book" />
+
         <div class="content">
           Readable
           <div class="sub header">React project</div>

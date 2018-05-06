@@ -11,24 +11,21 @@ class Buttons extends Component {
   render() {
     return (
       <div className="App">
-        <FlatButton
-          href="https://github.com/callemall/material-ui"
-          target="_blank"
-          secondary={true}
-          icon={<FontIcon className="muidocs-icon-custom-github" />}
-        />
-        <button
-          className="icon-btn"
-          onClick={() => this.orderPosts('voteScore')}
-        >
-          Order by Score
-        </button>
-        <button
-          className="icon-btn"
-          onClick={() => this.orderPosts('timestamp')}
-        >
-          Order by Date
-        </button>
+        <div class="ui buttons">
+          <button
+            class="ui button"
+            onClick={() => this.orderPosts('voteScore')}
+          >
+            Order by Score
+          </button>
+          <div class="or" />
+          <button
+            class="ui button"
+            onClick={() => this.orderPosts('timestamp')}
+          >
+            Order by Date
+          </button>
+        </div>
       </div>
     );
   }
