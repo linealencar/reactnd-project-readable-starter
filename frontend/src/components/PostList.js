@@ -2,33 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Control from './Control';
-import { Icon, Statistic } from 'semantic-ui-react';
+import { Item, Icon, Statistic } from 'semantic-ui-react';
 
 class PostList extends Component {
   render() {
     const { posts } = this.props;
     return (
       <div className="App">
-        <div class="ui divided items">
+        <Item.Group divided>
           {posts.map(post => (
-            <div class="item" key={post.id}>
-              <div class="content">
-                <span class="header">
+            <Item key={post.id} className="ui divided items">
+              <Item.Content>
+                <Item.Header as="span">
                   <Link to={`/postDetail/${post.id}`}>
                     {post.title}{' '}
-                    <span class="ui red circular label">
+                    <span className="ui red circular label">
                       {post.commentCount} comments
                     </span>
                   </Link>
-                </span>
-
-                <div class="meta">
-                  <span class="cinema">{post.author}</span>
-                </div>
-                <div class="description">
-                  <p>{post.body}</p>
-                </div>
-                <div class="extra">
+                </Item.Header>
+                <Item.Meta>
+                  {post.body}
+                  <br />
+                  <br />
+                  {post.author}
+                </Item.Meta>
+                <Item.Extra>
                   <Statistic size="mini" color="grey">
                     <Statistic.Value>
                       <Icon name="heart" />
@@ -36,11 +35,11 @@ class PostList extends Component {
                     </Statistic.Value>
                   </Statistic>
                   <Control postId={post.id} showAddComment={true} />
-                </div>
-              </div>
-            </div>
+                </Item.Extra>
+              </Item.Content>
+            </Item>
           ))}
-        </div>
+        </Item.Group>
       </div>
     );
   }

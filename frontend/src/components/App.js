@@ -6,7 +6,6 @@ import NewPost from './NewPost';
 import Category from './Category';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PostDetail from './PostDetail';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Head';
 
 class App extends Component {
