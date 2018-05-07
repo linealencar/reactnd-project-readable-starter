@@ -13,9 +13,15 @@ class PostList extends Component {
           {posts.map(post => (
             <div class="item" key={post.id}>
               <div class="content">
-                <a class="header">
-                  <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
-                </a>
+                <span class="header">
+                  <Link to={`/postDetail/${post.id}`}>
+                    {post.title}
+                    <span class="ui red circular label">
+                      {post.commentCount} comments
+                    </span>
+                  </Link>
+                </span>
+
                 <div class="meta">
                   <span class="cinema">{post.author}</span>
                 </div>
