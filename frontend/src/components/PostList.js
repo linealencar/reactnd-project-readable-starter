@@ -34,7 +34,7 @@ class PostList extends Component {
                       {post.voteScore}
                     </Statistic.Value>
                   </Statistic>
-                  <Control postId={post.id} />
+                  <Control postId={post.id} showCommentOption={false} />
                 </Item.Extra>
               </Item.Content>
             </Item>

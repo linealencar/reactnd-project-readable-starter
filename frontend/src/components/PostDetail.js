@@ -46,7 +46,11 @@ class PostDetail extends Component {
               <a className="ui teal tag label">{post.category}</a>
             </Accordion.Title>
             <Accordion.Content active={true}>
-              <Control postId={post.id} onToggleComment={this.toggleComment} />
+              <Control
+                postId={post.id}
+                onToggleComment={this.toggleComment}
+                showCommentOption={true}
+              />
               <div className="ui divided selection list">
                 <a className="item">
                   <div className="ui teal horizontal label">Author</div>
