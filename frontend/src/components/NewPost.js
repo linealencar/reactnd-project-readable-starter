@@ -3,9 +3,11 @@ import { addPost, listCategories } from '../actions';
 import { connect } from 'react-redux';
 import * as APIPost from '../utils/APIPost';
 import UUID from 'uuid/v1';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import { Form, Button } from 'semantic-ui-react';
+
+// import TextField from 'material-ui/TextField';
+// import SelectField from 'material-ui/SelectField';
+// import MenuItem from 'material-ui/MenuItem';
 
 class NewPost extends Component {
   state = {
@@ -35,21 +37,7 @@ class NewPost extends Component {
     });
   };
 
-  handleInputChange = event => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleSelectChange = (event, index, value) => {
-    this.setState({
-      category: value
-    });
-  };
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = event => {
     this.submitPost();
@@ -58,63 +46,59 @@ class NewPost extends Component {
 
   render() {
     return (
-      <div className="App">
-        <form onSubmit={this.handleSubmit}>
-          <TextField
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group widths={2}>
+          <Form.Input
+            label="Body"
+            placeholder="Body"
             name="body"
             type="text"
             value={this.state.body}
-            onChange={this.handleInputChange}
-            floatingLabelText="Body"
+            onChange={this.handleChange}
           />
-          <br />
-          <TextField
+          <Form.Input
+            label="Title"
+            placeholder="Title"
             name="title"
             type="text"
             value={this.state.title}
-            onChange={this.handleInputChange}
-            floatingLabelText="Title"
+            onChange={this.handleChange}
           />
-          <br />
-          <TextField
+        </Form.Group>
+        <Form.Group widths={2}>
+          <Form.Input
+            label="Author"
+            placeholder="Author"
             name="author"
             type="text"
             value={this.state.author}
-            onChange={this.handleInputChange}
-            floatingLabelText="Author"
+            onChange={this.handleChange}
           />
-          <br />
-          <SelectField
+          <Form.Select
+            fluid
+            label="Category"
             name="category"
             type="select"
-            floatingLabelText="Category"
+            options={this.props.categories}
             value={this.state.category}
-            onChange={this.handleSelectChange}
-          >
-            {this.props.categories.map(categorie => (
-              <MenuItem
-                value={categorie.name}
-                key={categorie.name}
-                primaryText={categorie.name}
-              />
-            ))}
-          </SelectField>
-          <br />
-          <br />
-          <br />
-          <input type="submit" value="Submit" />
-          <button className="icon-btn" onClick={this.closePostModal}>
-            Cancel
-          </button>
-        </form>
-      </div>
+            placeholder="Category"
+            onChange={this.handleChange}
+          />
+        </Form.Group>
+        <Button type="submit">Submit</Button>
+        <Button onClick={this.closePostModal}>Cancel</Button>
+      </Form>
     );
   }
 }
 
 function mapStateToProps({ categories }) {
   return {
-    categories
+    categories: categories.map(category => ({
+      key: category.path,
+      value: category.path,
+      text: category.name
+    }))
   };
 }
 

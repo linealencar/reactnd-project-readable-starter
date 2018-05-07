@@ -27,7 +27,7 @@ class PostDetail extends Component {
   };
 
   render() {
-    const { post, comments } = this.props;
+    const { post } = this.props;
     const { opened } = this.state;
     if (!post) return false;
     return (
@@ -67,10 +67,9 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ posts, comments }, { match }) {
+function mapStateToProps({ posts }, { match }) {
   return {
-    post: posts.find(p => (p.id = match.params.postId)),
-    comments
+    post: posts.find(p => (p.id = match.params.postId))
   };
 }
 
