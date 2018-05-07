@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { votePost, deletePost } from '../actions';
-// import * as APIPost from '../utils/APIPost';
 import { Icon } from 'semantic-ui-react';
 
 class Control extends Component {
@@ -34,14 +33,14 @@ class Control extends Component {
         <Icon
           circular
           color="teal"
-          name="thumbs down"
-          onClick={() => this.vote(postId, 'downVote')}
+          name="thumbs up"
+          onClick={() => this.vote(postId, 'upVote')}
         />
         <Icon
           circular
           color="teal"
-          name="thumbs up"
-          onClick={() => this.vote(postId, 'upVote')}
+          name="thumbs down"
+          onClick={() => this.vote(postId, 'downVote')}
         />
         <Icon
           circular
