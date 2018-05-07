@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { orderPosts } from '../actions';
 import { connect } from 'react-redux';
+import { Button } from 'semantic-ui-react';
 
 class Buttons extends Component {
   orderPosts = sortingType => {
@@ -9,21 +10,16 @@ class Buttons extends Component {
   render() {
     return (
       <div className="App">
-        <div class="ui buttons">
-          <button
-            class="ui button"
-            onClick={() => this.orderPosts('voteScore')}
-          >
+        <Button.Group>
+          <Button onClick={() => this.orderPosts('voteScore')}>
             Order by Score
-          </button>
-          <div class="or" />
-          <button
-            class="ui button"
-            onClick={() => this.orderPosts('timestamp')}
-          >
+          </Button>
+          <Button.Or />
+          <Button onClick={() => this.orderPosts('timestamp')}>
+            {' '}
             Order by Date
-          </button>
-        </div>
+          </Button>
+        </Button.Group>
         <br />
         <br />
       </div>
