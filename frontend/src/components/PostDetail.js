@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadPost, fetchComments } from '../actions';
+import { loadPostFunction, fetchComments } from '../actions';
 import * as APIPost from '../utils/APIPost';
 import Control from './Control';
 import CommentList from './CommentList';
@@ -81,7 +81,7 @@ function mapStateToProps({ posts, comments }, { match }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPost: post => dispatch(loadPost(post)),
+    loadPost: post => dispatch(loadPostFunction(post)),
     fetchComments: postId => dispatch(fetchComments(postId))
   };
 }

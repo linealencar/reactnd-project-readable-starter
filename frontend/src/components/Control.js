@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { votePost, deletePost } from '../actions';
-import * as APIPost from '../utils/APIPost';
+// import * as APIPost from '../utils/APIPost';
 import { Icon } from 'semantic-ui-react';
 
 class Control extends Component {
@@ -9,16 +9,24 @@ class Control extends Component {
     opened: false
   };
 
+  // vote(postId, voteType) {
+  //   APIPost.votePost(postId, voteType).then(post => {
+  //     this.props.votePost(post);
+  //   });
+  // }
+
   vote(postId, voteType) {
-    APIPost.votePost(postId, voteType).then(post => {
-      this.props.votePost(post);
-    });
+    this.props.votePost(postId, voteType);
   }
 
+  // deletePost(postId) {
+  //   APIPost.deletePost(postId).then(post => {
+  //     this.props.deletePost(post);
+  //   });
+  // }
+
   deletePost(postId) {
-    APIPost.deletePost(postId).then(post => {
-      this.props.deletePost(post);
-    });
+    this.props.deletePost(postId);
   }
 
   toggleComment = () => {
@@ -62,8 +70,8 @@ class Control extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    votePost: post => dispatch(votePost(post)),
-    deletePost: post => dispatch(deletePost(post))
+    votePost: (postId, voteType) => dispatch(votePost(postId, voteType)),
+    deletePost: postId => dispatch(deletePost(postId))
   };
 }
 

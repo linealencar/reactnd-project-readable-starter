@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import * as APIPost from '../utils/APIPost';
-import { loadPosts } from '../actions';
+import { fetchPostsByCategory } from '../actions';
 import { connect } from 'react-redux';
 import PostList from './PostList';
 import Buttons from './Buttons';
@@ -8,17 +7,13 @@ import Buttons from './Buttons';
 class Category extends Component {
   componentDidMount() {
     const { category } = this.props.match.params;
-    APIPost.getPostsByCategory(category).then(posts => {
-      this.props.loadPosts(posts);
-    });
+    this.props.fetchPostsByCategory(category);
   }
 
   componentWillReceiveProps(nextProps) {
     const { category } = nextProps.match.params;
     if (category !== this.props.match.params.category) {
-      APIPost.getPostsByCategory(category).then(posts => {
-        this.props.loadPosts(posts);
-      });
+      this.props.fetchPostsByCategory(category);
     }
   }
 
@@ -34,7 +29,7 @@ class Category extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: posts => dispatch(loadPosts(posts))
+    fetchPostsByCategory: category => dispatch(fetchPostsByCategory(category))
   };
 }
 

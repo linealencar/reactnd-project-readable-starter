@@ -34,7 +34,6 @@ class CommentList extends Component {
   };
   render() {
     const { comments, replyOpened } = this.props;
-    //const { opened } = this.state;
     return (
       <Comment.Group>
         <Header as="h3" dividing>

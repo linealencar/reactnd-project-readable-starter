@@ -24,19 +24,27 @@ export function addPost(post) {
   };
 }
 
-export function votePost(post) {
+export function votePostFunction(post) {
   return {
     type: VOTE_POST,
     post
   };
 }
 
-export function deletePost(post) {
+export const votePost = (postId, voteType) => dispatch =>
+  APIPost.votePost(postId, voteType).then(post =>
+    dispatch(votePostFunction(post))
+  );
+
+export function deletePostFunction(post) {
   return {
     type: DELETE_POST,
     post
   };
 }
+
+export const deletePost = postId => dispatch =>
+  APIPost.deletePost(postId).then(post => dispatch(deletePostFunction(post)));
 
 export function updatePost({ id, title, body, author, category }) {
   return {
@@ -49,7 +57,7 @@ export function updatePost({ id, title, body, author, category }) {
   };
 }
 
-export function loadPosts(posts) {
+export function loadPostsFunction(posts) {
   return {
     type: LOAD_POSTS,
     posts
@@ -57,9 +65,14 @@ export function loadPosts(posts) {
 }
 
 export const fetchPosts = () => dispatch =>
-  APIPost.getAll().then(posts => dispatch(loadPosts(posts)));
+  APIPost.getAll().then(posts => dispatch(loadPostsFunction(posts)));
 
-export function loadPost(post) {
+export const fetchPostsByCategory = category => dispatch =>
+  APIPost.getPostsByCategory(category).then(posts =>
+    dispatch(loadPostsFunction(posts))
+  );
+
+export function loadPostFunction(post) {
   return {
     type: LOAD_POST,
     post
@@ -67,7 +80,7 @@ export function loadPost(post) {
 }
 
 export const fetchPost = postId => dispatch =>
-  APIPost.getPostById(postId).then(post => dispatch(loadPost(post)));
+  APIPost.getPostById(postId).then(post => dispatch(loadPostFunction(post)));
 
 export function orderPosts(sortingType) {
   return {
