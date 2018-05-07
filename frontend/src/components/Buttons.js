@@ -26,10 +26,8 @@ class Buttons extends Component {
     );
   }
 }
-function mapDispatchToProps(dispatch) {
-  return {
-    orderPosts: sortingType => dispatch(orderPosts(sortingType))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  orderPosts: sortingType => dispatch(orderPosts(sortingType))
+});
 
 export default connect(null, mapDispatchToProps)(Buttons);

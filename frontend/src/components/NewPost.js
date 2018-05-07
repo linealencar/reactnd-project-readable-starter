@@ -84,21 +84,17 @@ class NewPost extends Component {
   }
 }
 
-function mapStateToProps({ categories }) {
-  return {
-    categories: categories.map(category => ({
-      key: category.path,
-      value: category.path,
-      text: category.name
-    }))
-  };
-}
+const mapStateToProps = ({ categories }) => ({
+  categories: categories.map(category => ({
+    key: category.path,
+    value: category.path,
+    text: category.name
+  }))
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    insertPost: post => dispatch(insertPost(post)),
-    listCategories: () => dispatch(listCategories())
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  insertPost: post => dispatch(insertPost(post)),
+  listCategories: () => dispatch(listCategories())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPost);

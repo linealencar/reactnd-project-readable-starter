@@ -38,12 +38,10 @@ class ControlComment extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    voteComment: (commentId, voteType) =>
-      dispatch(voteComment(commentId, voteType)),
-    deleteComment: commentId => dispatch(deleteComment(commentId))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  voteComment: (commentId, voteType) =>
+    dispatch(voteComment(commentId, voteType)),
+  deleteComment: commentId => dispatch(deleteComment(commentId))
+});
 
 export default connect(null, mapDispatchToProps)(ControlComment);

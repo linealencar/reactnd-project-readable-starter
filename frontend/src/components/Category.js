@@ -27,10 +27,8 @@ class Category extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchPostsByCategory: category => dispatch(fetchPostsByCategory(category))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  fetchPostsByCategory: category => dispatch(fetchPostsByCategory(category))
+});
 
 export default connect(null, mapDispatchToProps)(Category);

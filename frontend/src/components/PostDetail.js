@@ -43,7 +43,7 @@ class PostDetail extends Component {
               </Statistic>
               <br />
               {post.title}
-              <a class="ui teal tag label">{post.category}</a>
+              <a className="ui teal tag label">{post.category}</a>
             </Accordion.Title>
             <Accordion.Content active={true}>
               <Control postId={post.id} onToggleComment={this.toggleComment} />
@@ -67,17 +67,13 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ posts }, { match }) {
-  return {
-    post: posts.find(p => (p.id = match.params.postId))
-  };
-}
+const mapStateToProps = ({ posts }, { match }) => ({
+  post: posts.find(p => (p.id = match.params.postId))
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchPost: postId => dispatch(fetchPost(postId)),
-    fetchComments: postId => dispatch(fetchComments(postId))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  fetchPost: postId => dispatch(fetchPost(postId)),
+  fetchComments: postId => dispatch(fetchComments(postId))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

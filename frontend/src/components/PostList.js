@@ -45,10 +45,8 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps({ posts, sorting }) {
-  return {
-    posts: posts.slice().sort((a, b) => b[sorting] - a[sorting])
-  };
-}
+const mapStateToProps = ({ posts, sorting }) => ({
+  posts: posts.slice().sort((a, b) => b[sorting] - a[sorting])
+});
 
 export default connect(mapStateToProps, null)(PostList);

@@ -56,11 +56,9 @@ class Control extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    votePost: (postId, voteType) => dispatch(votePost(postId, voteType)),
-    deletePost: postId => dispatch(deletePost(postId))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  votePost: (postId, voteType) => dispatch(votePost(postId, voteType)),
+  deletePost: postId => dispatch(deletePost(postId))
+});
 
 export default connect(null, mapDispatchToProps)(Control);

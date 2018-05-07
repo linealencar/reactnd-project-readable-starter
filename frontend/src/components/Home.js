@@ -19,10 +19,8 @@ class Home extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchPosts: () => dispatch(fetchPosts())
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  fetchPosts: () => dispatch(fetchPosts())
+});
 
 export default connect(null, mapDispatchToProps)(Home);

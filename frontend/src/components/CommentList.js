@@ -37,7 +37,7 @@ class CommentList extends Component {
     return (
       <Comment.Group>
         <Header as="h3" dividing>
-          Comments<a class="ui red circular label">{comments.length}</a>
+          Comments<a className="ui red circular label">{comments.length}</a>
         </Header>
 
         {replyOpened && (
@@ -83,16 +83,12 @@ class CommentList extends Component {
   }
 }
 
-function mapStateToProps({ comments }) {
-  return {
-    comments: comments.slice().sort((a, b) => b['voteScore'] - a['voteScore'])
-  };
-}
+const mapStateToProps = ({ comments }) => ({
+  comments: comments.slice().sort((a, b) => b['voteScore'] - a['voteScore'])
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    insertComment: comment => dispatch(insertComment(comment))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  insertComment: comment => dispatch(insertComment(comment))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList);
