@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { insertPost, listCategories } from '../actions';
 import { connect } from 'react-redux';
 import UUID from 'uuid/v1';
-import { Form, Button, Container } from 'semantic-ui-react';
+import { Form, Button, Container, Message } from 'semantic-ui-react';
 
 class NewPost extends Component {
   state = {
@@ -10,7 +10,8 @@ class NewPost extends Component {
     title: '',
     body: '',
     author: '',
-    category: ''
+    category: '',
+    success: false
   };
 
   componentDidMount() {
@@ -35,12 +36,27 @@ class NewPost extends Component {
   handleSubmit = event => {
     this.submitPost();
     event.preventDefault();
+    this.setState({
+      title: '',
+      body: '',
+      author: '',
+      category: '',
+      success: true
+    });
   };
 
   render() {
+    const { success } = this.state;
     return (
       <Container>
-        <Form onSubmit={this.handleSubmit}>
+        <Form success onSubmit={this.handleSubmit}>
+          {success && (
+            <Message
+              success
+              header="Form Completed"
+              content="You have sent the post"
+            />
+          )}
           <Form.Input
             label="Title"
             placeholder="Title"
@@ -76,6 +92,7 @@ class NewPost extends Component {
             value={this.state.body}
             onChange={this.handleChange}
           />
+
           <Button type="submit">Submit</Button>
           <Button onClick={this.closePostModal}>Cancel</Button>
         </Form>
