@@ -24,6 +24,8 @@ export function addPost(post) {
     post
   };
 }
+export const insertPost = post => dispatch =>
+  APIPost.insert(post).then(post => dispatch(addPost(post)));
 
 export function votePostFunction(post) {
   return {
