@@ -85,7 +85,7 @@ class CommentList extends Component {
 
 function mapStateToProps({ comments }) {
   return {
-    comments
+    comments: comments.slice().sort((a, b) => b['voteScore'] - a['voteScore'])
   };
 }
 

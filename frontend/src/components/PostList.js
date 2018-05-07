@@ -36,35 +36,6 @@ class PostList extends Component {
           ))}
         </div>
       </div>
-
-      // <Accordion fluid styled>
-      //   {posts.map(post => (
-      //     <div key={post.id}>
-      //       <Accordion.Title
-      //         active={activeIndex === 0}
-      //         index={0}
-      //         // onClick={this.handleClick}
-      //       >
-      //         <br />
-      //         {/* <Icon name="dropdown" />{' '} */}
-      //         <Statistic size="mini" color="grey">
-      //           <Statistic.Value>
-      //             <Icon name="heart" />
-      //             {post.voteScore}
-      //           </Statistic.Value>
-      //         </Statistic>
-      //         <Control postId={post.id} showAddComment={true} />
-      //         <br />
-      //         <Link to={`/postDetail/${post.id}`}>{post.title}</Link>
-      //         <br />
-      //       </Accordion.Title>
-
-      //       <Accordion.Content active={activeIndex === 0}>
-      //         <p>{post.author}</p>
-      //       </Accordion.Content>
-      //     </div>
-      //   ))}
-      // </Accordion>
     );
   }
 }

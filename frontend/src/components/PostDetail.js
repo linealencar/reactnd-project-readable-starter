@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadPostFunction, fetchComments } from '../actions';
-import * as APIPost from '../utils/APIPost';
+import { fetchPost, fetchComments } from '../actions';
 import Control from './Control';
 import CommentList from './CommentList';
 import { Accordion, Statistic, Icon } from 'semantic-ui-react';
@@ -14,11 +13,7 @@ class PostDetail extends Component {
 
   componentDidMount() {
     const { postId } = this.props.match.params;
-
-    APIPost.getPostById(postId).then(post => {
-      this.props.loadPost(post);
-    });
-
+    this.props.fetchPost(postId);
     this.props.fetchComments(postId);
   }
 
@@ -81,7 +76,7 @@ function mapStateToProps({ posts, comments }, { match }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPost: post => dispatch(loadPostFunction(post)),
+    fetchPost: postId => dispatch(fetchPost(postId)),
     fetchComments: postId => dispatch(fetchComments(postId))
   };
 }
