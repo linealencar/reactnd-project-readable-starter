@@ -14,16 +14,14 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <MuiThemeProvider>
-            <Header />
-            <Menu />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/addPost" component={NewPost} />
-              <Route path="/postDetail/:postId" component={PostDetail} />
-              <Route path="/:category" component={Category} />
-            </Switch>
-          </MuiThemeProvider>
+          <Header />
+          <Menu />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/addPost" component={NewPost} />
+            <Route path="/postDetail/:postId" component={PostDetail} />
+            <Route path="/:category" component={Category} />
+          </Switch>
         </div>
       </BrowserRouter>
     );
