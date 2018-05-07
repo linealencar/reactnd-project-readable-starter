@@ -4,10 +4,6 @@ import { votePost, deletePost } from '../actions';
 import { Icon } from 'semantic-ui-react';
 
 class Control extends Component {
-  state = {
-    opened: false
-  };
-
   vote(postId, voteType) {
     this.props.votePost(postId, voteType);
   }
@@ -15,15 +11,6 @@ class Control extends Component {
   deletePost(postId) {
     this.props.deletePost(postId);
   }
-
-  toggleComment = () => {
-    // check if box is currently opened
-    const { opened } = this.state;
-    this.setState({
-      // toggle value of `opened`
-      opened: !opened
-    });
-  };
 
   render() {
     const { postId, onToggleComment } = this.props;
