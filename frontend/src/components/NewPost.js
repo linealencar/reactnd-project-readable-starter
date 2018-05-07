@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { insertPost, listCategories } from '../actions';
 import { connect } from 'react-redux';
-import * as APIPost from '../utils/APIPost';
 import UUID from 'uuid/v1';
 import { Form, Button, Container } from 'semantic-ui-react';
 
@@ -42,14 +41,6 @@ class NewPost extends Component {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
-          <Form.TextArea
-            label="Body"
-            placeholder="Body"
-            name="body"
-            type="text"
-            value={this.state.body}
-            onChange={this.handleChange}
-          />
           <Form.Input
             label="Title"
             placeholder="Title"
@@ -74,6 +65,15 @@ class NewPost extends Component {
             options={this.props.categories}
             value={this.state.category}
             placeholder="Category"
+            onChange={this.handleChange}
+          />
+          <Form.TextArea
+            label="Body"
+            placeholder="Body"
+            name="body"
+            type="text"
+            autoHeight
+            value={this.state.body}
             onChange={this.handleChange}
           />
           <Button type="submit">Submit</Button>

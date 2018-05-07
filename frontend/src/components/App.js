@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Home from './Home';
-import Menu from './Menu';
+import Menu from './MainMenu';
 import NewPost from './NewPost';
 import Category from './Category';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';

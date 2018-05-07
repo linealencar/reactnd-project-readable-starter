@@ -15,7 +15,7 @@ class PostList extends Component {
               <div class="content">
                 <span class="header">
                   <Link to={`/postDetail/${post.id}`}>
-                    {post.title}
+                    {post.title}{' '}
                     <span class="ui red circular label">
                       {post.commentCount} comments
                     </span>
