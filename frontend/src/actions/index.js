@@ -1,5 +1,6 @@
 import * as APIPost from '../utils/APIPost';
 import * as APIComment from '../utils/APIComment';
+import * as APICategory from '../utils/APICategory';
 
 export const ADD_POST = 'ADD_POST';
 export const VOTE_POST = 'VOTE_POST';
@@ -146,9 +147,14 @@ export const fetchComments = postId => dispatch =>
     dispatch(loadComments(comments))
   );
 
-export function listCategory(categories) {
+export function listCategoriesFunction(categories) {
   return {
     type: LIST_CATEGORY,
     categories
   };
 }
+
+export const listCategories = () => dispatch =>
+  APICategory.getAll().then(categories =>
+    dispatch(listCategoriesFunction(categories))
+  );

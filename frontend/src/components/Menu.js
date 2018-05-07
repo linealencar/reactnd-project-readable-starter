@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import * as APICategory from '../utils/APICategory';
-import { listCategory } from '../actions';
+import { listCategories } from '../actions';
 import { connect } from 'react-redux';
 
 class Menu extends Component {
   componentDidMount() {
-    APICategory.getAll().then(categories => {
-      this.props.listCategory(categories);
-    });
+    this.props.listCategories();
   }
   render() {
     return (
@@ -35,7 +32,7 @@ function mapStateToProps({ categories }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    listCategory: categories => dispatch(listCategory(categories))
+    listCategories: () => dispatch(listCategories())
   };
 }
 

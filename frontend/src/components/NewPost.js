@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { addPost, listCategory } from '../actions';
+import { addPost, listCategories } from '../actions';
 import { connect } from 'react-redux';
-import * as APICategory from '../utils/APICategory';
 import * as APIPost from '../utils/APIPost';
 import UUID from 'uuid/v1';
 import TextField from 'material-ui/TextField';
@@ -18,9 +17,7 @@ class NewPost extends Component {
   };
 
   componentDidMount() {
-    APICategory.getAll().then(categories => {
-      this.props.listCategory(categories);
-    });
+    this.props.listCategories();
   }
 
   submitPost = () => {
@@ -124,7 +121,7 @@ function mapStateToProps({ categories }) {
 function mapDispatchToProps(dispatch) {
   return {
     addPost: post => dispatch(addPost(post)),
-    listCategory: categories => dispatch(listCategory(categories))
+    listCategories: () => dispatch(listCategories())
   };
 }
 

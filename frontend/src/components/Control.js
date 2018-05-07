@@ -9,21 +9,9 @@ class Control extends Component {
     opened: false
   };
 
-  // vote(postId, voteType) {
-  //   APIPost.votePost(postId, voteType).then(post => {
-  //     this.props.votePost(post);
-  //   });
-  // }
-
   vote(postId, voteType) {
     this.props.votePost(postId, voteType);
   }
-
-  // deletePost(postId) {
-  //   APIPost.deletePost(postId).then(post => {
-  //     this.props.deletePost(post);
-  //   });
-  // }
 
   deletePost(postId) {
     this.props.deletePost(postId);
