@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Comment, Form, Header, Statistic, Icon } from 'semantic-ui-react';
-import { insertComment } from '../actions';
+import { insertComment, updateComment } from '../actions';
 import UUID from 'uuid/v1';
 import ControlComment from './ControlComment';
 
@@ -29,25 +29,38 @@ class CommentList extends Component {
   submitComment = () => {
     const { postId } = this.props;
     const comment = {
-      id: UUID(),
+      id: this.state.id === null ? UUID() : this.state.id,
       parentId: postId,
       timestamp: Date.now(),
       body: this.state.body,
       author: this.state.author
     };
-    this.props.insertComment(comment);
+    if (this.state.id === null) {
+      this.props.insertComment(comment);
+    } else {
+      this.props.updateComment(comment.id, comment.body);
+    }
   };
 
   handleSubmit = event => {
     this.submitComment();
     event.preventDefault();
+    this.setState({
+      body: '',
+      author: ''
+    });
   };
 
   editComment = comment => {
-    this.setState({ opened: true, body: comment.body, author: comment.author });
+    this.setState({
+      opened: true,
+      id: comment.id,
+      body: comment.body,
+      author: comment.author
+    });
   };
   render() {
-    const { comments, replyOpened } = this.props;
+    const { comments } = this.props;
     const { opened } = this.state;
 
     return (
@@ -107,7 +120,8 @@ const mapStateToProps = ({ comments }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  insertComment: comment => dispatch(insertComment(comment))
+  insertComment: comment => dispatch(insertComment(comment)),
+  updateComment: (id, body) => dispatch(updateComment(id, body))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList);

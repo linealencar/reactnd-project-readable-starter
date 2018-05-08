@@ -10,7 +10,8 @@ import {
   LOAD_COMMENTS,
   ADD_COMMENT,
   VOTE_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  UPDATE_COMMENT
 } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -52,6 +53,10 @@ function comments(state = [], action) {
       return action.comments;
     case ADD_COMMENT:
       return state.concat(action.comment);
+    case UPDATE_COMMENT:
+      return state
+        .filter(comment => comment.id !== action.comment.id)
+        .concat(action.comment);
     case VOTE_COMMENT:
       return state
         .filter(comment => comment.id !== action.comment.id)

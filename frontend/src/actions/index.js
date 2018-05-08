@@ -128,14 +128,17 @@ export const deleteComment = commentId => dispatch =>
     dispatch(deleteCommentFunction(comment))
   );
 
-export function updateComment({ id, body, author }) {
+export function updateCommentFunction(comment) {
   return {
     type: UPDATE_COMMENT,
-    id,
-    body,
-    author
+    comment
   };
 }
+
+export const updateComment = (id, body) => dispatch =>
+  APIComment.editComment(id, body).then(comment =>
+    dispatch(updateCommentFunction(comment))
+  );
 
 export function loadComments(comments) {
   return {
