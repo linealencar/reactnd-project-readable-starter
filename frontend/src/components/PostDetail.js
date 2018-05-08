@@ -4,7 +4,6 @@ import { fetchPost, fetchComments } from '../actions';
 import Control from './Control';
 import CommentList from './CommentList';
 import { Accordion, Statistic, Icon } from 'semantic-ui-react';
-import Timestamp from 'react-timestamp';
 
 class PostDetail extends Component {
   state = {
@@ -59,7 +58,7 @@ class PostDetail extends Component {
                 <a className="item">{post.body} </a>
                 <a className="item">
                   <div className="ui teal horizontal label">Date</div>
-                  <Timestamp time={post.timestamp} format="full" />
+                  {new Date(post.timestamp).toLocaleDateString()}
                 </a>
               </div>
               <CommentList replyOpened={opened} postId={post.id} />

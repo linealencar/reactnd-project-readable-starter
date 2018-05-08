@@ -44,8 +44,7 @@ class CommentList extends Component {
   };
 
   editComment = comment => {
-    this.setState({ opened: true });
-    //this.setState(comment);
+    this.setState({ opened: true, body: comment.body, author: comment.author });
   };
   render() {
     const { comments, replyOpened } = this.props;
@@ -91,7 +90,7 @@ class CommentList extends Component {
               <Comment.Metadata>
                 <ControlComment
                   commentId={comment.id}
-                  onEditComment={this.editComment(comment)}
+                  onEditComment={() => this.editComment(comment)}
                 />
               </Comment.Metadata>
               <Comment.Text>{comment.body}</Comment.Text>

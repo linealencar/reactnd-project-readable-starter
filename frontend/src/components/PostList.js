@@ -21,12 +21,7 @@ class PostList extends Component {
                     </span>
                   </Link>
                 </Item.Header>
-                <Item.Meta>
-                  {post.body}
-                  <br />
-                  <br />
-                  {post.author}
-                </Item.Meta>
+                <Item.Meta>{post.author}</Item.Meta>
                 <Item.Extra>
                   <Statistic size="mini" color="grey">
                     <Statistic.Value>

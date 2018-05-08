@@ -55,7 +55,7 @@ class NewPost extends Component {
   };
 
   render() {
-    const { success } = this.state;
+    const { success, id } = this.state;
     return (
       <Container>
         <Form success onSubmit={this.handleSubmit}>
@@ -78,6 +78,7 @@ class NewPost extends Component {
             label="Author"
             placeholder="Author"
             name="author"
+            disabled={!!id}
             type="text"
             value={this.state.author}
             onChange={this.handleChange}
@@ -86,6 +87,7 @@ class NewPost extends Component {
             fluid
             label="Category"
             name="category"
+            disabled={!!id}
             type="select"
             options={this.props.categories}
             value={this.state.category}
@@ -121,7 +123,7 @@ const mapStateToProps = ({ categories }) => ({
 const mapDispatchToProps = dispatch => ({
   insertPost: post => dispatch(insertPost(post)),
   listCategories: () => dispatch(listCategories()),
-  updatePost: (id, title, body) => dispatch(updatePost((id, title, body)))
+  updatePost: (id, title, body) => dispatch(updatePost(id, title, body))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
