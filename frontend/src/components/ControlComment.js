@@ -20,13 +20,13 @@ class ControlComment extends Component {
       <div>
         <Icon
           color="teal"
-          name="thumbs down"
-          onClick={() => this.vote(commentId, 'downVote')}
+          name="thumbs up"
+          onClick={() => this.vote(commentId, 'upVote')}
         />
         <Icon
           color="teal"
-          name="thumbs up"
-          onClick={() => this.vote(commentId, 'upVote')}
+          name="thumbs down"
+          onClick={() => this.vote(commentId, 'downVote')}
         />
         <Icon
           color="teal"

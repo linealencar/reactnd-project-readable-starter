@@ -59,7 +59,7 @@ class PostDetail extends Component {
                 <a className="item">{post.body} </a>
                 <a className="item">
                   <div className="ui teal horizontal label">Date</div>
-                  <Timestamp time={post.timestamp} format="date" />
+                  <Timestamp time={post.timestamp} format="full" />
                 </a>
               </div>
               <CommentList replyOpened={opened} postId={post.id} />

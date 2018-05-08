@@ -36,8 +36,6 @@ export const deletePost = postId =>
       ...headers,
       'Content-Type': 'application/json'
     }
-    // },
-    // body: JSON.stringify({ option: vote })
   })
     .then(res => res.json())
     .then(data => data);
@@ -50,4 +48,13 @@ export const votePost = (postId, vote) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ option: vote })
+  }).then(res => res.json());
+
+export const editPost = postId =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
   }).then(res => res.json());

@@ -49,16 +49,14 @@ export function deletePostFunction(post) {
 export const deletePost = postId => dispatch =>
   APIPost.deletePost(postId).then(post => dispatch(deletePostFunction(post)));
 
-export function updatePost({ id, title, body, author, category }) {
+export function updatePostFunction(post) {
   return {
     type: UPDATE_POST,
-    id,
-    title,
-    body,
-    author,
-    category
+    post
   };
 }
+export const updatePost = postId => dispatch =>
+  APIPost.editPost(postId).then(post => dispatch(updatePostFunction(post)));
 
 export function loadPostsFunction(posts) {
   return {

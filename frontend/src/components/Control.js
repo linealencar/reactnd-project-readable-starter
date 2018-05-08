@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { votePost, deletePost } from '../actions';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import PostDetail from './PostDetail';
 
 class Control extends Component {
   vote(postId, voteType) {
@@ -16,7 +17,13 @@ class Control extends Component {
   }
 
   render() {
-    const { postId, onToggleComment, showCommentOption } = this.props;
+    const {
+      postId,
+      onToggleComment,
+      showCommentOption,
+      history,
+      post
+    } = this.props;
 
     return (
       <div>
@@ -31,6 +38,19 @@ class Control extends Component {
           color="teal"
           name="thumbs down"
           onClick={() => this.vote(postId, 'downVote')}
+        />
+        <Icon
+          circular
+          color="teal"
+          name="edit"
+          onClick={() =>
+            history.push({
+              pathname: '/addPost',
+              state: {
+                post: post
+              }
+            })
+          }
         />
         <Icon
           circular
@@ -51,10 +71,15 @@ class Control extends Component {
     );
   }
 }
+const mapStateToProps = ({ post }) => ({
+  post
+});
 
 const mapDispatchToProps = dispatch => ({
   votePost: (postId, voteType) => dispatch(votePost(postId, voteType)),
   deletePost: postId => dispatch(deletePost(postId))
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(Control));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Control)
+);

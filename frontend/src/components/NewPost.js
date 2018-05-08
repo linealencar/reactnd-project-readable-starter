@@ -16,6 +16,7 @@ class NewPost extends Component {
 
   componentDidMount() {
     this.props.listCategories();
+    console.log(this.props.location.state);
   }
 
   submitPost = () => {

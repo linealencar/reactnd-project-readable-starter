@@ -5,6 +5,7 @@ import {
   LOAD_POST,
   VOTE_POST,
   ADD_POST,
+  UPDATE_POST,
   DELETE_POST,
   LOAD_COMMENTS,
   ADD_COMMENT,
@@ -27,6 +28,8 @@ function posts(state = [], action) {
     case ADD_POST:
       return state.concat(action.post);
     case LOAD_POST:
+      return [action.post];
+    case UPDATE_POST:
       return [action.post];
     case LOAD_POSTS:
       return action.posts;
