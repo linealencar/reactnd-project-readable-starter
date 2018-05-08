@@ -14,7 +14,7 @@ class PostList extends Component {
             <Item key={post.id} className="ui divided items">
               <Item.Content>
                 <Item.Header as="span">
-                  <Link to={`/postDetail/${post.id}`}>
+                  <Link to={`/${post.category}/${post.id}`}>
                     {post.title}{' '}
                     <span className="ui red circular label">
                       {post.commentCount} comments
@@ -34,7 +34,7 @@ class PostList extends Component {
                       {post.voteScore}
                     </Statistic.Value>
                   </Statistic>
-                  <Control postId={post.id} showCommentOption={false} />
+                  <Control post={post} showCommentOption={false} />
                 </Item.Extra>
               </Item.Content>
             </Item>

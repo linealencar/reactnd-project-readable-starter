@@ -55,8 +55,10 @@ export function updatePostFunction(post) {
     post
   };
 }
-export const updatePost = postId => dispatch =>
-  APIPost.editPost(postId).then(post => dispatch(updatePostFunction(post)));
+export const updatePost = (id, title, body) => dispatch =>
+  APIPost.editPost(id, title, body).then(post =>
+    dispatch(updatePostFunction(post))
+  );
 
 export function loadPostsFunction(posts) {
   return {

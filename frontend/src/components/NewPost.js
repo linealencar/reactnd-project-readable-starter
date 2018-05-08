@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { insertPost, listCategories } from '../actions';
+import { insertPost, listCategories, updatePost } from '../actions';
 import { connect } from 'react-redux';
 import UUID from 'uuid/v1';
 import { Form, Button, Container, Message } from 'semantic-ui-react';
@@ -16,12 +16,16 @@ class NewPost extends Component {
 
   componentDidMount() {
     this.props.listCategories();
-    console.log(this.props.location.state);
+
+    const { state } = this.props.location;
+    if (state) {
+      this.setState(state.post);
+    }
   }
 
   submitPost = () => {
     const post = {
-      id: UUID(),
+      id: this.state.id === null ? UUID() : this.state.id,
       timestamp: Date.now(),
       title: this.state.title,
       body: this.state.body,
@@ -29,7 +33,11 @@ class NewPost extends Component {
       category: this.state.category
     };
 
-    this.props.insertPost(post);
+    if (this.state.id === null) {
+      this.props.insertPost(post);
+    } else {
+      this.props.updatePost(post.id);
+    }
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
@@ -112,7 +120,8 @@ const mapStateToProps = ({ categories }) => ({
 
 const mapDispatchToProps = dispatch => ({
   insertPost: post => dispatch(insertPost(post)),
-  listCategories: () => dispatch(listCategories())
+  listCategories: () => dispatch(listCategories()),
+  updatePost: (id, title, body) => dispatch(updatePost((id, title, body)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
