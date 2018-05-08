@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { votePost, deletePost } from '../actions';
 import { Icon } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 
 class Control extends Component {
   vote(postId, voteType) {
@@ -9,7 +10,9 @@ class Control extends Component {
   }
 
   deletePost(postId) {
+    const { history } = this.props;
     this.props.deletePost(postId);
+    history.push('/');
   }
 
   render() {
@@ -54,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   deletePost: postId => dispatch(deletePost(postId))
 });
 
-export default connect(null, mapDispatchToProps)(Control);
+export default withRouter(connect(null, mapDispatchToProps)(Control));
