@@ -7,12 +7,22 @@ import ControlComment from './ControlComment';
 
 class CommentList extends Component {
   state = {
-    opened: false,
     id: null,
     parentId: null,
     body: '',
-    author: ''
+    author: '',
+    opened: false
   };
+
+  componentDidMount() {
+    const { replyOpened } = this.props;
+    this.setState({ opened: replyOpened });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { replyOpened } = this.props;
+    this.setState({ opened: replyOpened });
+  }
 
   handleInputChange = (e, { name, value }) => this.setState({ [name]: value });
 
@@ -32,15 +42,22 @@ class CommentList extends Component {
     this.submitComment();
     event.preventDefault();
   };
+
+  editComment = comment => {
+    this.setState({ opened: true });
+    //this.setState(comment);
+  };
   render() {
     const { comments, replyOpened } = this.props;
+    const { opened } = this.state;
+
     return (
       <Comment.Group>
         <Header as="h3" dividing>
           Comments<a className="ui red circular label">{comments.length}</a>
         </Header>
 
-        {replyOpened && (
+        {opened && (
           <Form reply onSubmit={this.handleSubmit}>
             <Form.TextArea
               placeholder="Comment here"
@@ -72,7 +89,10 @@ class CommentList extends Component {
               <br />
               <Comment.Author as="a">{comment.author}</Comment.Author>
               <Comment.Metadata>
-                <ControlComment commentId={comment.id} />
+                <ControlComment
+                  commentId={comment.id}
+                  onEditComment={this.editComment(comment)}
+                />
               </Comment.Metadata>
               <Comment.Text>{comment.body}</Comment.Text>
             </Comment.Content>

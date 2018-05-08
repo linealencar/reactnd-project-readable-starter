@@ -9,12 +9,11 @@ class ControlComment extends Component {
   }
 
   delete(commentId) {
-    console.log(commentId);
     this.props.deleteComment(commentId);
   }
 
   render() {
-    const { commentId } = this.props;
+    const { commentId, onEditComment } = this.props;
 
     return (
       <div>
@@ -28,6 +27,7 @@ class ControlComment extends Component {
           name="thumbs down"
           onClick={() => this.vote(commentId, 'downVote')}
         />
+        <Icon color="teal" name="edit" onClick={onEditComment} />
         <Icon
           color="teal"
           name="trash"

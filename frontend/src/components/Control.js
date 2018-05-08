@@ -42,8 +42,7 @@ class Control extends Component {
               state: {
                 post: post
               }
-            })
-          }
+            })}
         />
         <Icon
           circular

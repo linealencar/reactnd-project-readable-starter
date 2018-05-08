@@ -30,7 +30,9 @@ function posts(state = [], action) {
     case LOAD_POST:
       return [action.post];
     case UPDATE_POST:
-      return [action.post];
+      return state
+        .filter(post => post.id !== action.post.id)
+        .concat(action.post);
     case LOAD_POSTS:
       return action.posts;
     case VOTE_POST:
