@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPost, fetchComments } from '../actions';
 import Control from './Control';
 import CommentList from './CommentList';
-import { Statistic, Icon, Item } from 'semantic-ui-react';
+import { Statistic, Icon, Item, Header, Container } from 'semantic-ui-react';
 
 class PostDetail extends Component {
   state = {
@@ -28,7 +28,13 @@ class PostDetail extends Component {
   render() {
     const { post } = this.props;
     const { opened } = this.state;
-    if (!post) return false;
+    console.log(post);
+    if (!post || post.error)
+      return (
+        <Container textAlign="center">
+          <Header>Post not found.</Header>
+        </Container>
+      );
     return (
       <Item>
         <Item.Content>
@@ -44,7 +50,7 @@ class PostDetail extends Component {
             <span className="ui teal tag label">{post.category}</span>
             <br />
             <Control
-              postId={post.id}
+              post={post}
               onToggleComment={this.toggleComment}
               showCommentOption={true}
             />
