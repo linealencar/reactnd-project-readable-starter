@@ -22,37 +22,8 @@
   font-size: large;
 }
 
-.post {
-  text-align: center;
-  background-color: #eae0d5;
-  padding: 1%;
-  margin: 2%;
-  margin-left: 0;
-  list-style-type: none;
-}
-
-table.postDetail {
-  width: 50%;
-  border: 1px solid #1c6ea4;
-  background-color: #ffffff;
-  text-align: left;
-  border-collapse: collapse;
-  margin-top: 5%;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 13px;
-}
-table.postDetail caption {
-  font-size: 15px;
-  font-weight: bold;
-}
-table.postDetail td,
-table.postDetail th {
-  border: 1px solid #aaaaaa;
-  padding: 3px 2px;
-}
-table.postDetail tr:nth-child(even) {
-  background: #d0e4f5;
+.display-linebreak {
+  white-space: pre-line;
 }
 
 @keyframes App-logo-spin {
