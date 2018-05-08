@@ -36,7 +36,7 @@ class NewPost extends Component {
     if (this.state.id === null) {
       this.props.insertPost(post);
     } else {
-      this.props.updatePost(post.id);
+      this.props.updatePost(post.id, post.title, post.body);
     }
   };
 
